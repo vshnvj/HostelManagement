@@ -1,0 +1,44 @@
+﻿create table Rooms
+(
+Room_no int primary key,
+Capacity int,
+Type varchar(30),
+Rent float
+);
+
+
+
+create table Roles
+( 
+Role_id int primary key,
+Role varchar(20)
+);
+
+
+create table Users
+(
+Id int primary key,
+Name varchar(30),
+Gender varchar(10),
+Mobile varchar(10),
+Email varchar(30),
+Address varchar(50),
+Room_no int foreign key  references Rooms(Room_no),
+
+Role_id int foreign key  references Roles(Role_id)
+
+);
+
+create table Payment
+(
+Id int primary key,
+User_id int foreign key references Users(Id),
+Amount int,
+Date_of_payment date
+
+);
+
+insert into Roles values(1,"Owner");
+insert into Roles values(0,"Guest");
+
+-------------------------------

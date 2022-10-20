@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="444433412dec48d6aed3260bc5a275ae" Name="Diagram1">
+        <EntityTypeShape EntityType="HostelDatabaseModel.Allocation" Width="1.5" PointX="4.125" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HostelDatabaseModel.Payment" Width="1.5" PointX="2.875" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HostelDatabaseModel.Role" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HostelDatabaseModel.Room" Width="1.5" PointX="6.125" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HostelDatabaseModel.User" Width="1.5" PointX="2.25" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="HostelDatabaseModel.FK__Allocatio__Room___628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="HostelDatabaseModel.FK__Allocatio__User___6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="HostelDatabaseModel.FK__Payment__User_id__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="HostelDatabaseModel.FK__Users__Role_id__60A75C0F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
