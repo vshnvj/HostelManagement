@@ -23,6 +23,17 @@ namespace HostelManagement.Controllers
             
             return db.Users.ToList();
         }
+        [Route("GetUserByEmail")]
+        public async Task<IHttpActionResult> GetUserByEmail(string email)
+        {
+            User u=db.Users.FirstOrDefault(x => x.Email == email);
+            if(u==null)
+            {
+                return NotFound();
+            }
+            return Ok(u);
+        }
+
 
         // GET: api/Users/5
         [ResponseType(typeof(User))]
@@ -82,8 +93,8 @@ namespace HostelManagement.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Users.Add(user);
 
+            db.Users.Add(user);
             try
             {
                 await db.SaveChangesAsync();
@@ -100,7 +111,8 @@ namespace HostelManagement.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
+            return Ok(user);
+                //CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
         // DELETE: api/Users/5

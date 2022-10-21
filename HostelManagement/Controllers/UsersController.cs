@@ -65,14 +65,16 @@ namespace HostelManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Gender,Mobile,Email,Address,Status,Password,Role_id")] User user)
+        public async Task<ActionResult> Create([Bind(Include ="Id,Name,Gender,Mobile,Email,Address,Status,Password,Role_id")] User user)
         {
+
             var response = client.PostAsJsonAsync<User>("http://localhost:64533/api/usersapi", user);
             response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+              
+                return RedirectToAction("Index","UsersHome",user);
             }
             return View();
         }
