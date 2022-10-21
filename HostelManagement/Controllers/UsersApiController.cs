@@ -48,6 +48,22 @@ namespace HostelManagement.Controllers
             return Ok(user);
         }
 
+        [HttpGet]
+        [Route("RequestSent")]
+        public async Task<IHttpActionResult> RequestSent(int id)
+        {
+            User user = await db.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            user.Status = 1;
+            db.Entry(user).State=EntityState.Modified;
+            db.SaveChanges();
+            return Ok(user);
+        }
+
+
         // PUT: api/Users/5
         [Route("PutUser")]
         [ResponseType(typeof(void))]
@@ -88,6 +104,9 @@ namespace HostelManagement.Controllers
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> PostUser(User user)
         {
+            user.Id = db.Users.ToList().Count + 1;
+            user.Status = 0;
+            user.Role_id = 0;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

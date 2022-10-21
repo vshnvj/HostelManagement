@@ -1,6 +1,6 @@
 ﻿drop table users
 CREATE TABLE [dbo].[Users] (
-    [Id]       INT       NOT NULL,
+    [Id]       INT     NOT NULL ,
     [Name]     VARCHAR (30) NULL,
     [Gender]   VARCHAR (10) NULL,
     [Mobile]   VARCHAR (10) NULL,
@@ -14,7 +14,7 @@ CREATE TABLE [dbo].[Users] (
 
 
 
-set identity_insert Users off;
 
-insert into users values(1,'Admin','Male','9098786578','admin@mail.com','India',1,'admin',1);
+insert into users (Id,Name,Gender,Mobile,Email,Address,Status,Password,Role_id)
+values(2,'Admin','Male','9098786578','admin@mail.com','India',1,'admin',1);
 

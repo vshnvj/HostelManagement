@@ -6,6 +6,12 @@
 Users Home Page
 <h2>Welcome , @Model.Name  </h2>
 
-@*@Html.ActionLink("Profile", "Edit", new { id = item.Id }) |
-@Html.ActionLink()
-@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+@Html.ActionLink("Profile", "Edit", new { id = Model.Id }) |
+
+
+@Html.ActionLink("Submit your application", "Requests", new { id = Model.Id }) |
+
+@Html.ActionLink("Status of appliation", "SeeRequests", new { id = Model.Id }) 
+
+
+@ViewData["success"]

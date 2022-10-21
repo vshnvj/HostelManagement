@@ -73,8 +73,9 @@ namespace HostelManagement.Controllers
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
-              
-                return RedirectToAction("Index","UsersHome",user);
+                var us = test.Content.ReadAsAsync<User>();
+                User user1 = us.Result;
+                return RedirectToAction("Index","UsersHome",user1 );
             }
             return View();
         }
@@ -117,7 +118,8 @@ namespace HostelManagement.Controllers
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Index", "UsersHome",user);
             }
             return View();
         }
