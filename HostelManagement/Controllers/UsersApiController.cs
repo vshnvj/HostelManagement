@@ -163,5 +163,8 @@ namespace HostelManagement.Controllers
         {
             return db.Users.Count(e => e.Id == id) > 0;
         }
+
+
+
     }
 }

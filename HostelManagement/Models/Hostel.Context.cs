@@ -19,6 +19,7 @@ namespace HostelManagement.Models
             : base("name=HostelDatabaseEntities2")
         {
             Configuration.ProxyCreationEnabled = false;
+         
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

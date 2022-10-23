@@ -163,6 +163,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
+    <Compile Include="Controllers\AllocationsApiController.cs" />
+    <Compile Include="Controllers\AllocationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoomsApiController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
@@ -279,7 +281,6 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\UsersHome\Index.cshtml" />
-    <Content Include="Views\AdminHome\Index.cshtml" />
     <Content Include="Views\Rooms\Create.cshtml" />
     <Content Include="Views\Rooms\Delete.cshtml" />
     <Content Include="Views\Rooms\Details.cshtml" />
@@ -287,6 +288,19 @@
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\UsersHome\Requests.cshtml" />
     <Content Include="Views\UsersHome\SeeRequests.cshtml" />
+    <Content Include="Views\Shared\Admin_layout.cshtml" />
+    <Content Include="Views\AdminHome\Index.cshtml" />
+    <Content Include="Views\AdminHome\Rooms.cshtml" />
+    <Content Include="Views\AdminHome\Users.cshtml" />
+    <Content Include="Views\AdminHome\Allocate.cshtml" />
+    <Content Include="Views\Allocations\Create.cshtml" />
+    <Content Include="Views\Allocations\Delete.cshtml" />
+    <Content Include="Views\Allocations\Details.cshtml" />
+    <Content Include="Views\Allocations\Edit.cshtml" />
+    <Content Include="Views\Allocations\Index.cshtml" />
+    <Content Include="Views\AdminHome\AllocatedRooms.cshtml" />
+    <Content Include="Views\Users\AddRoom.cshtml" />
+    <Content Include="Views\Shared\User_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

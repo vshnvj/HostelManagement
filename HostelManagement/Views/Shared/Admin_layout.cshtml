@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <h2>Admin</h2>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Home", "Index", "AdminHome")</li>
+            <li>@Html.ActionLink("Users",  "Users")</li>
+            <li>@Html.ActionLink("Rooms", "Rooms")</li>
+            <li>@Html.ActionLink("Allocated Rooms", "AllocatedRooms")</li>
+
+        </ul>
+    </div>
+    
+    <div class="container body-content">
+
+        @RenderBody()
+        <hr />
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        </div>
+</body>
+</html>
+
+
+

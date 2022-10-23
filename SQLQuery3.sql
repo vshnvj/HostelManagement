@@ -16,5 +16,5 @@ CREATE TABLE [dbo].[Users] (
 
 
 insert into users (Id,Name,Gender,Mobile,Email,Address,Status,Password,Role_id)
-values(2,'Admin','Male','9098786578','admin@mail.com','India',1,'admin',1);
+values(2,'Admin','Male','9098786578','admin@mail.com','India',0,'admin',1);
 

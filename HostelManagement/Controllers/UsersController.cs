@@ -110,7 +110,7 @@ namespace HostelManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Gender,Mobile,Email,Address,Status,Password,Role_id")] User user)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Gender,Mobile,Email,Address,Status,Password,Role_id,Room_no")] User user)
         {
             
             var response = client.PutAsJsonAsync<User>("http://localhost:64533/putuser?id=" + user.Id.ToString(), user);
@@ -157,6 +157,14 @@ namespace HostelManagement.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+
+
+
+     
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -165,5 +173,8 @@ namespace HostelManagement.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
     }
 }

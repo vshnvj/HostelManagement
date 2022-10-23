@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <h2>User Home page</h2>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>@*@Html.ActionLink("Profile", "Edit",new{id=Model.)*@</li>
+            <li>@Html.ActionLink("Users", "Users")</li>
+            <li>@Html.ActionLink("Rooms", "Rooms")</li>
+            <li>@Html.ActionLink("Allocated Rooms", "AllocatedRooms")</li>
+
+            
+            @*<h2>Welcome , @Model.Name  </h2>*@
+
+            @Html.ActionLink("Profile", "Edit", new { id = Model.Id }) |
+
+
+            @Html.ActionLink("Submit your application", "Requests", new { id = Model.Id }) |
+
+            @Html.ActionLink("Status of appliation", "SeeRequests", new { id = Model.Id })
+
+        </ul>
+    </div>
+
+    <div class="container body-content">
+
+        @RenderBody()
+        <hr />
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </div>
+</body>
+</html>
+
+
+

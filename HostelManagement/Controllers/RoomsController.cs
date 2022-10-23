@@ -18,19 +18,9 @@ namespace HostelManagement.Controllers
         public ActionResult Index()
         {
             HttpClient client = new HttpClient();
-
-
-
             List<Room> r_list = new List<Room>();
-
-
-
-
-            var response = client.GetAsync(uri);
-
-
-
-            response.Wait();
+                var response = client.GetAsync(uri);
+              response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
@@ -83,7 +73,9 @@ namespace HostelManagement.Controllers
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Rooms","AdminHome");
+
             }
             return View();
         }
@@ -133,7 +125,10 @@ namespace HostelManagement.Controllers
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+
+                return RedirectToAction("Rooms", "AdminHome");
+
             }
             return View();
         }
@@ -196,12 +191,14 @@ namespace HostelManagement.Controllers
 
             response.Wait();
 
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return RedirectToAction("Rooms", "AdminHome");
+
         }
 
 
 
-      
+
     }
 }
     
