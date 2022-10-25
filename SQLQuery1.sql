@@ -1,4 +1,4 @@
-﻿------------------------Database= HostelDatabase
+﻿----------------Database= HostelDatabase
 create table Rooms
 (
 Room_no int primary key,
