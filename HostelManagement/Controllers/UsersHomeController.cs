@@ -12,10 +12,21 @@ namespace HostelManagement.Controllers
     {
         // GET: UsersHome
         User user;
-        public ActionResult Index(User u)
+        HttpClient client = new HttpClient();
+        public ActionResult Index(int id)
         {
-            user = u;
-            return View(u);
+            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
+            User li = new User();
+            response.Wait();
+            var test = response.Result;
+            if (test.IsSuccessStatusCode)
+            {
+                var r = test.Content.ReadAsAsync<User>();
+                //r.Wait();
+                li = r.Result;
+            }
+            return View(li);
+           
         }
 
         public ActionResult Edit(int? id)
@@ -25,7 +36,7 @@ namespace HostelManagement.Controllers
 
         public ActionResult Requests(int? id)
         {
-            HttpClient client = new HttpClient();
+           
             var response = client.GetAsync("http://localhost:64533/requestsent?id=" + id.ToString());
             response.Wait();
             User user1=new User();

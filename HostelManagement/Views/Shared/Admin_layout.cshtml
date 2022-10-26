@@ -13,9 +13,11 @@
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <li>@Html.ActionLink("Home", "Index", "AdminHome")</li>
-            <li>@Html.ActionLink("Users",  "Users")</li>
-            <li>@Html.ActionLink("Rooms", "Rooms")</li>
-            <li>@Html.ActionLink("Allocated Rooms", "AllocatedRooms")</li>
+            <li>@Html.ActionLink("Users", "Users", "AdminHome")</li>
+            <li>@Html.ActionLink("Rooms", "Rooms", "AdminHome")</li>
+            <li>@Html.ActionLink("Allocated Rooms", "AllocatedRooms", "AdminHome")</li>
+
+            <li>@Html.ActionLink("Track Rent", "TrackRent", "AdminHome")</li>
 
         </ul>
     </div>

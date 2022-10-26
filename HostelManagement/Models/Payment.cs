@@ -11,12 +11,19 @@ namespace HostelManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Payment
     {
+
+     
         public int Id { get; set; }
         public Nullable<int> User_id { get; set; }
+        [Required]
         public Nullable<int> Amount { get; set; }
+        
+        [Required]
         public Nullable<System.DateTime> Date_of_payment { get; set; }
     
         public virtual User User { get; set; }

@@ -22,11 +22,8 @@ namespace HostelManagement.Controllers
         public async Task<IHttpActionResult> GetAllocations()
         {
 
-            var allocations = db.Allocations.ToList();
-            foreach(var a in allocations)
-            {
-                a.User = db.Users.Find(a.User_id);
-            }
+            var allocations = db.Allocations.Include(a=>a.User).Include(x=>x.Room);
+           
             return Ok(allocations);
         }
 
@@ -35,15 +32,15 @@ namespace HostelManagement.Controllers
         [ResponseType(typeof(Allocation))]
         public async Task<IHttpActionResult> GetAllocation(int id)
         {
-            Allocation allocation = await db.Allocations.FindAsync(id);
-            int a =(int) allocation.User_id;
-            allocation.User = db.Users.Find(allocation.User_id);
-            if (allocation == null)
+            var allocation = db.Allocations.Include(x => x.User).Include(x => x.Room).ToList();
+            Allocation all = allocation.Find(x => x.User_id == id);
+
+            if (all == null)
             {
                 return NotFound();
             }
 
-            return Ok(allocation);
+            return Ok(all);
         }
 
         // PUT: api/AllocationsApi/5
@@ -130,16 +127,30 @@ namespace HostelManagement.Controllers
         [ResponseType(typeof(Allocation))]
         public async Task<IHttpActionResult> DeleteAllocation(int id)
         {
-            Allocation allocation = await db.Allocations.FindAsync(id);
+            var allocation = db.Allocations.Include(x => x.User).Include(x=>x.Room).ToList();
+            Allocation all = allocation.Find(x => x.User_id == id);
+
+            
             if (allocation == null)
             {
                 return NotFound();
             }
 
-            db.Allocations.Remove(allocation);
+           
+
+
+            User u = all.User;
+            u.Status = 3;
+
+            Room room = all.Room;
+            room.available = room.available + 1;
+
+            db.Entry(u).State = EntityState.Modified;
+            db.Entry(room).State = EntityState.Modified;
+            db.Allocations.Remove(all);
             await db.SaveChangesAsync();
 
-            return Ok(allocation);
+            return Ok(all);
         }
 
         protected override void Dispose(bool disposing)

@@ -1,9 +1,10 @@
 ﻿@model HostelManagement.Models.User
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/User_Layout.cshtml";
 }
 
-Users Home Page
+
 <h2>Welcome , @Model.Name  </h2>
 
 @Html.ActionLink("Profile", "Edit", new { id = Model.Id }) |

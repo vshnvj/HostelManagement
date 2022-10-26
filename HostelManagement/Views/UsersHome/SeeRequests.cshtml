@@ -1,12 +1,13 @@
 ﻿
 @{
     ViewBag.Title = "SeeRequests";
+    Layout = "~/Views/Shared/User_Layout.cshtml";
 }
 
 <h2>Sent Requests</h2>
 @{
-if(ViewData["Status"]!=null)
-{<h5>status: </h5>@ViewData["Status"];
+    if (ViewData["Status"]!=null)
+    {<h5>status: </h5>@ViewData["Status"];
 }
 }
 

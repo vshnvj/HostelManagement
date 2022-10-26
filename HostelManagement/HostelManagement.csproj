@@ -166,6 +166,8 @@
     <Compile Include="Controllers\AllocationsApiController.cs" />
     <Compile Include="Controllers\AllocationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentsApiController.cs" />
+    <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\RoomsApiController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\UsersApiController.cs" />
@@ -258,6 +260,9 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Sql.txt" />
     <Content Include="Web.config" />
@@ -276,9 +281,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\UsersHome\Index.cshtml" />
     <Content Include="Views\Rooms\Create.cshtml" />
@@ -295,12 +298,14 @@
     <Content Include="Views\AdminHome\Allocate.cshtml" />
     <Content Include="Views\Allocations\Create.cshtml" />
     <Content Include="Views\Allocations\Delete.cshtml" />
-    <Content Include="Views\Allocations\Details.cshtml" />
-    <Content Include="Views\Allocations\Edit.cshtml" />
-    <Content Include="Views\Allocations\Index.cshtml" />
     <Content Include="Views\AdminHome\AllocatedRooms.cshtml" />
-    <Content Include="Views\Users\AddRoom.cshtml" />
     <Content Include="Views\Shared\User_Layout.cshtml" />
+    <Content Include="Views\Payments\Create.cshtml" />
+    <Content Include="Views\Payments\Delete.cshtml" />
+    <Content Include="Views\Payments\Details.cshtml" />
+    <Content Include="Views\Payments\Edit.cshtml" />
+    <Content Include="Views\Payments\Index.cshtml" />
+    <Content Include="Views\AdminHome\TrackRent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

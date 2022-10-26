@@ -37,7 +37,7 @@ namespace HostelManagement.Controllers
                     return RedirectToAction("Index", "AdminHome");
 
                     else
-                        return RedirectToAction("Index", "UsersHome",u);
+                        return RedirectToAction("Index", "UsersHome", new { id = u.Id });
 
                 }
 

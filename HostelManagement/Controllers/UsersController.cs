@@ -19,39 +19,39 @@ namespace HostelManagement.Controllers
         // GET: Users
         HttpClient client = new HttpClient();
         string uri = "http://localhost:64533/api/usersapi";
-        public async Task<ActionResult> Index()
-        {
+        //public async Task<ActionResult> Index()
+        //{
 
-            //
+        //    //
 
-            var response = client.GetAsync("http://localhost:64533/api/usersapi");
-            List<User> li = new List<User>();
-            response.Wait();
-            var test = response.Result;
-            if (test.IsSuccessStatusCode)
-            {
-                var rooms = test.Content.ReadAsAsync<List<User>>();
-                rooms.Wait();
-                li = rooms.Result;
-            }
-            return View(li);
-        }
+        //    var response = client.GetAsync("http://localhost:64533/api/usersapi");
+        //    List<User> li = new List<User>();
+        //    response.Wait();
+        //    var test = response.Result;
+        //    if (test.IsSuccessStatusCode)
+        //    {
+        //        var rooms = test.Content.ReadAsAsync<List<User>>();
+        //        rooms.Wait();
+        //        li = rooms.Result;
+        //    }
+        //    return View(li);
+        //}
 
         // GET: Users/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
-            User li = new User();
-            response.Wait();
-            var test = response.Result;
-            if (test.IsSuccessStatusCode)
-            {
-                var r = test.Content.ReadAsAsync<User>();
-                //r.Wait();
-                li = r.Result;
-            }
-            return View(li);
-        }
+        //public async Task<ActionResult> Details(int? id)
+        //{
+        //    var response = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
+        //    User li = new User();
+        //    response.Wait();
+        //    var test = response.Result;
+        //    if (test.IsSuccessStatusCode)
+        //    {
+        //        var r = test.Content.ReadAsAsync<User>();
+        //        //r.Wait();
+        //        li = r.Result;
+        //    }
+        //    return View(li);
+        //}
 
         // GET: Users/Create
         public ActionResult Create()
@@ -68,14 +68,14 @@ namespace HostelManagement.Controllers
         public async Task<ActionResult> Create([Bind(Include ="Id,Name,Gender,Mobile,Email,Address,Status,Password,Role_id")] User user)
         {
 
-            var response = client.PostAsJsonAsync<User>("http://localhost:64533/api/usersapi", user);
+            var response = client.PostAsJsonAsync<User>("http://localhost:64533/api/usersapi/", user);
             response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
                 var us = test.Content.ReadAsAsync<User>();
                 User user1 = us.Result;
-                return RedirectToAction("Index","UsersHome",user1 );
+                return RedirectToAction("Index", "UsersHome", new { id = user1.Id });
             }
             return View();
         }
@@ -119,7 +119,7 @@ namespace HostelManagement.Controllers
             if (test.IsSuccessStatusCode)
             {
                 //return RedirectToAction("Index");
-                return RedirectToAction("Index", "UsersHome",user);
+                return RedirectToAction("Index", "UsersHome",new { id = user.Id });
             }
             return View();
         }
@@ -158,11 +158,34 @@ namespace HostelManagement.Controllers
         }
 
 
+        [HttpPost]
+        public JsonResult IsEmailExist(string Email)
+        {
+            var response = client.GetAsync("http://localhost:64533/GetUserByEmail?email=" + Email);
+            response.Wait();
+            var test = response.Result;
+            User user = new User();
+            bool status=false;
+            if (test.IsSuccessStatusCode)
+            {
+              //Available to use  
+                    status = false;
+           }
+            else status = true;
+            //  User user = db.Users.Where(a => a.Email.ToLower() == Email.ToLower()).FirstOrDefault();
+
+
+            return Json(status, JsonRequestBehavior.AllowGet);
 
 
 
 
-     
+
+        }
+
+
+
+
 
 
         protected override void Dispose(bool disposing)

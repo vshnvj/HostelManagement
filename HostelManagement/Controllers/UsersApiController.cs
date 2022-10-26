@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -78,7 +80,7 @@ namespace HostelManagement.Controllers
             {
                 return BadRequest();
             }
-
+            
             db.Entry(user).State = EntityState.Modified;
 
             try
@@ -104,35 +106,34 @@ namespace HostelManagement.Controllers
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> PostUser(User user)
         {
-            user.Id = db.Users.ToList().Count + 1;
+            string con = "data source=(localdb)\\ProjectsV13;initial catalog=HostelDatabase;integrated security=True";
+            SqlConnection conn = new SqlConnection(con);
+            conn.Open();
             user.Status = 0;
             user.Role_id = 0;
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            SqlCommand command = new SqlCommand(@"INSERT INTO [dbo].[Users] ( [Name], [Gender], [Mobile], [Email], [Address], [Status], [Password], [Role_id]) 
+                                                                     values  (@u1, @u2,@u3,@u4,@u5,@u6, @u7, @u8)", conn);
 
-
-            db.Users.Add(user);
-            try
+            command.Parameters.AddWithValue("@u1", user.Name);
+            command.Parameters.AddWithValue("@u2", user.Gender);
+            command.Parameters.AddWithValue("@u3", user.Mobile);
+            command.Parameters.AddWithValue("@u4", user.Email);
+            command.Parameters.AddWithValue("@u5", user.Address);
+            command.Parameters.AddWithValue("@u6", 0);
+            command.Parameters.AddWithValue("@u7", user.Password);
+            command.Parameters.AddWithValue("@u8", 0); 
+            int r;
+           
+                r = command.ExecuteNonQuery();
+            
+                if (r > 0)
             {
-                await db.SaveChangesAsync();
+                
+                return Ok(db.Users.FirstOrDefault(x=>x.Email==user.Email));
             }
-            catch (DbUpdateException)
-            {
-                if (UserExists(user.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            return BadRequest();
 
-            return Ok(user);
-                //CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
-        }
+             }
 
         // DELETE: api/Users/5
         [ResponseType(typeof(User))]

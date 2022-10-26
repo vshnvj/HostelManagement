@@ -6,6 +6,10 @@
 }
 
 <h2>Guests</h2>
+<form action="">
+    search by name:<input type="text" name="search" class="form-control" value=""/>
+    <input type="submit" value="Search" class="btn btn-default" />
+</form>
 
 <table class="table">
     <tr>
@@ -25,10 +29,8 @@
             @Html.DisplayNameFor(model => model.Address)
         </th>
         
+      
         @*<th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Password)
         </th>
         <th>
@@ -55,10 +57,8 @@
         @Html.DisplayFor(modelItem => item.Address)
     </td>
     
-    @*<td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
+    
+        @*<td>
             @Html.DisplayFor(modelItem => item.Password)
         </td>
         <td>
@@ -68,6 +68,7 @@
 
         @*@Html.ActionLink("Details", "Users", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+
     </td>
 </tr>
 }

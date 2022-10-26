@@ -14,6 +14,7 @@ namespace HostelManagement.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web.Mvc;
 
     public partial class User
     {
@@ -25,20 +26,30 @@ namespace HostelManagement.Models
         }
        
         
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
 
-        
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
+        
+        [Required]
+
         public string Gender { get; set; }
+        
+        [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid mobile number.")]
         public string Mobile { get; set; }
-        //[Required(ErrorMessage ="required")]
+
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress]
+        [Remote("IsEmailExist", "Users", ErrorMessage = "Email already exists", HttpMethod = "POST")]
         public string Email { get; set; }
+        [Required]
         public string Address { get; set; }
         public Nullable<int> Status { get; set; }
-        //[Required(ErrorMessage = "required")]
+        
+        [Required(ErrorMessage = "Password is required")]
+        //[RegularExpression("",ErrorMessage ="")]
         public string Password { get; set; }
 
         public Nullable<int> Role_id { get; set; }

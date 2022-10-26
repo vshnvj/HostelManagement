@@ -75,6 +75,7 @@ namespace HostelManagement.Controllers
         [ResponseType(typeof(Room))]
         public async Task<IHttpActionResult> PostRoom(Room room)
         {
+            room.available = room.Capacity;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
