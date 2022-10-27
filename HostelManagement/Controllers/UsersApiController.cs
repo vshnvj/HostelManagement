@@ -22,9 +22,19 @@ namespace HostelManagement.Controllers
         // GET: api/Users
         public List<User> GetUsers()
         {
-            
+
             return db.Users.ToList();
         }
+
+        //[HttpGet]
+        //[Route("TrackRent")]
+        //public List<User> TrackRent()
+        //{
+        //    //var l = ;
+        //    return db.Users.Include(x => x.Allocations ).Include(c=>c.Payments).ToList();
+        //}
+
+
         [Route("GetUserByEmail")]
         public async Task<IHttpActionResult> GetUserByEmail(string email)
         {
