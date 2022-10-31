@@ -1,6 +1,5 @@
 ﻿--  Database= HostelDatabase
 
-
 CREATE TABLE [dbo].[Users] (
     [Id]       INT identity(1,1)    NOT NULL ,
     [Name]     VARCHAR (30) NULL,
@@ -29,15 +28,18 @@ CREATE TABLE [dbo].[Payment] (
     [Date_of_payment] DATE NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+
 set identity_insert  Payment OFF; 
 
+CREATE TABLE [dbo].[Rooms] (
+    [Room_no]   INT        NOT NULL,
+    [Capacity]  INT        NULL,
+    [available] INT        NULL,
+    [Rent]      FLOAT (53) NULL,
+    PRIMARY KEY CLUSTERED ([Room_no] ASC)
+);
 
-create table Rooms
-(
-Room_no int primary key,
-Capacity int,
-Type varchar(30),
-Rent float
 );
 
 
@@ -55,5 +57,14 @@ insert into Roles values(1,"Owner");
 insert into Roles values(0,"Guest");
 
 -------------------------------
+CREATE TABLE [dbo].[Allocation] (
+    [Room_no]            INT  NULL,
+    [User_id]            INT  NULL,
+    [Date_of_allocation] DATE NULL,
+    [Id]                 INT  NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    FOREIGN KEY ([Room_no]) REFERENCES [dbo].[Rooms] ([Room_no])
+);
+
 
 

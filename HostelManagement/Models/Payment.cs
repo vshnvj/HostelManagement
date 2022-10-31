@@ -24,6 +24,8 @@ namespace HostelManagement.Models
         public Nullable<int> Amount { get; set; }
         
         [Required]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy }", ApplyFormatInEditMode = true)]
+
         public Nullable<System.DateTime> Date_of_payment { get; set; }
     
         public virtual User User { get; set; }

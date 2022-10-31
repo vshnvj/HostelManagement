@@ -126,26 +126,14 @@ namespace HostelManagement.Controllers
 
         public ActionResult TrackRent()
         {
-            //List<Payment> pays = AllRents();
-            //string uri = "http://localhost:64533/api/AllocationsApi/";
-            //var response = client.GetAsync(uri);
-            //response.Wait();
-            //var test = response.Result;
-            //List<Allocation> list = new List<Allocation>();
-            //if (test.IsSuccessStatusCode)
-            //{
-            //    var employees = test.Content.ReadAsAsync<List<Allocation>>();
-            //    employees.Wait();
-            //    list = employees.Result;
+          
 
-
-            //    //var res = pays.FindAll(x => x.User.Union(list.User));
-
-            //}
             var list = AllRents();
 
 
             return View(list);
+
+
         }
 
 

@@ -11,11 +11,14 @@ namespace HostelManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Allocation
     {
         public Nullable<int> Room_no { get; set; }
         public Nullable<int> User_id { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy }")]
         public Nullable<System.DateTime> Date_of_allocation { get; set; }
         public int Id { get; set; }
     

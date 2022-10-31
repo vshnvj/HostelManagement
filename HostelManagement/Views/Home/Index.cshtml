@@ -1,13 +1,24 @@
 ﻿
-<div>
-    <form action="Home/Login" method="post">
-        Email: <input type="email" name="email" />
-        <br />
-        Password: <input type="password" name="password" />
-        <br />
-        <input type="submit" value="Log In" />
-    </form>
+        <form action="Home/Login" method="post">
 
+            <div class="form-group">
 
-    @Html.ActionLink("Register", "Create", "Users") 
-</div>
+                Email:
+
+                <input type="email" name="email" class="form-control" required />
+
+            </div>
+            <div class="form-group">
+
+                Password:
+
+                <input type="password" name="password" class="form-control" required />
+            </div>
+
+            <input type="submit" value="Login" class="btn btn-primary" />
+
+        </form>
+<br />
+        <div>
+            @Html.ActionLink("Register", "Create", "Users")
+        </div>

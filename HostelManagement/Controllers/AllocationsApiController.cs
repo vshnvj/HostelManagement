@@ -89,12 +89,13 @@ namespace HostelManagement.Controllers
 
             allocation.Room = db.Rooms.Find(allocation.Room_no);
             allocation.User = db.Users.Find(allocation.User_id);
-            db.Allocations.Add(allocation);
+            //db.Allocations.Add(allocation);
         
 
             User u=db.Users.Find(allocation.User_id);
             u.Status = 2;
-            
+            u.Allocations.Add(allocation);
+
             Room room = db.Rooms.Find(allocation.Room_no);
             room.available=room.available- 1;
 
@@ -144,6 +145,7 @@ namespace HostelManagement.Controllers
 
             Room room = all.Room;
             room.available = room.available + 1;
+
 
             db.Entry(u).State = EntityState.Modified;
             db.Entry(room).State = EntityState.Modified;
