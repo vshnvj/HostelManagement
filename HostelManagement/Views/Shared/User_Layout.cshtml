@@ -1,31 +1,20 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <h1 style="position:center">Welcome</h1>
-    <h2>User Home page</h2>
+
+    <div class="p-5 text-center bg-light">
+        <h1 class="mb-3">Hostel Management system</h1>
+    </div>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
 
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            @*<li>@Html.ActionLink("Profile", "Edit","UserHome",new { id = Model.Id })</li>
-            <li>@Html.ActionLink("Submit your application", "Requests", "UserHome", new { id = Model.Id })</li>
-            <li>@Html.ActionLink("Status of appliation", "SeeRequests", "UserHome", new { id = Model.Id })</li>*@
-            @*<li>@Html.ActionLink("Allocated Rooms", "AllocatedRooms")</li>*@
 
-            
-            @*<h2>Welcome , @Model.Name  </h2>*@
-
-       
-        </ul>
-    </div>
 
     <div class="container body-content">
 
@@ -38,6 +27,5 @@
     </div>
 </body>
 </html>
-
 
 

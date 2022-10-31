@@ -4,13 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <h2>Admin</h2>
+
+    <div class="p-5 text-center bg-light">
+        <h1 class="mb-3">Hostel Management system</h1>
+    </div>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
 
-    <div class="navbar-collapse collapse">
+    <div class="navbar fixed-top  navbar-light" style="background-color: #e3f2fd;">
         <ul class="nav navbar-nav">
             <li>@Html.ActionLink("Home", "Index", "AdminHome")</li>
             <li>@Html.ActionLink("Users", "Users", "AdminHome")</li>
@@ -18,10 +22,14 @@
             <li>@Html.ActionLink("Allocated Rooms", "AllocatedRooms", "AdminHome")</li>
 
             <li>@Html.ActionLink("Track Rent", "TrackRent", "AdminHome")</li>
+            <li>@Html.ActionLink("user feedback", "Feedback", "AdminHome")</li>
 
         </ul>
+        <span class="navbar-brand ">
+            Admin
+        </span>
     </div>
-    
+
     <div class="container body-content">
 
         @RenderBody()
@@ -30,9 +38,10 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
-        </div>
+    </div>
 </body>
 </html>
+
 
 
 

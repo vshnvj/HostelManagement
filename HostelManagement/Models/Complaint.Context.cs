@@ -13,13 +13,11 @@ namespace HostelManagement.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HostelDatabaseEntities2 : DbContext
+    public partial class HostelDatabaseEntities6 : DbContext
     {
-        public HostelDatabaseEntities2()
-            : base("name=HostelDatabaseEntities2")
+        public HostelDatabaseEntities6()
+            : base("name=HostelDatabaseEntities6")
         {
-            Configuration.ProxyCreationEnabled = false;
-         
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -27,12 +25,6 @@ namespace HostelManagement.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Allocation> Allocations { get; set; }
-        public virtual DbSet<Payment> Payments { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Room> Rooms { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-
-        public System.Data.Entity.DbSet<HostelManagement.Models.complaint> complaints { get; set; }
+        public virtual DbSet<complaint> complaints { get; set; }
     }
 }

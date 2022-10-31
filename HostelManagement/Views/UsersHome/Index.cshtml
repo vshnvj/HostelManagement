@@ -12,7 +12,9 @@
 
 @Html.ActionLink("Submit your application", "Requests", new { id = Model.Id }) |
 
-@Html.ActionLink("Status of appliation", "SeeRequests", new { id = Model.Id }) 
+@Html.ActionLink("Status of appliation", "SeeRequests", new { id = Model.Id }) |
+
+@Html.ActionLink("complaint/feedback", "Feedback")
 
 
 @ViewData["success"]
