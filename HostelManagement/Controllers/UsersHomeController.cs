@@ -68,6 +68,8 @@ namespace HostelManagement.Controllers
                 u = re.Result;
                 if (u.Status == 2)
                    ViewData["Status"]="Approved";
+                if (u.Status == 3)
+                    ViewData["Status"] = "Rejected";
                 else
                 if (u.Status == 1)
                     ViewData["Status"] = "Applied";

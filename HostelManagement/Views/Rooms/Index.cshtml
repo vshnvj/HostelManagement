@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Capacity)
@@ -35,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.Rent)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Room_no }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.Room_no}) |
             @Html.ActionLink("Details", "Details", new { id=item.Room_no }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Room_no })
         </td>
