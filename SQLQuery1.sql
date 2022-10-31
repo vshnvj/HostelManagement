@@ -1,4 +1,4 @@
---  Database= HostelDatabase
+﻿--  Database= HostelDatabase
 
 CREATE TABLE [dbo].[Users] (
     [Id]       INT identity(1,1)    NOT NULL ,
@@ -40,6 +40,7 @@ CREATE TABLE [dbo].[Rooms] (
     PRIMARY KEY CLUSTERED ([Room_no] ASC)
 );
 
+);
 
 
 

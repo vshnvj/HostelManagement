@@ -34,6 +34,11 @@ namespace HostelManagement.Controllers
             return RedirectToAction("Edit", "Users", new { id = id });
         }
 
+        public ActionResult Feedback()
+        {
+            return RedirectToAction("Create", "complaint");
+        }
+
         public ActionResult Requests(int? id)
         {
            

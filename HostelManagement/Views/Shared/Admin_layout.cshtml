@@ -22,13 +22,14 @@
             <li>@Html.ActionLink("Allocated Rooms", "AllocatedRooms", "AdminHome")</li>
 
             <li>@Html.ActionLink("Track Rent", "TrackRent", "AdminHome")</li>
+            <li>@Html.ActionLink("user feedback", "Feedback", "AdminHome")</li>
 
         </ul>
         <span class="navbar-brand " >
             Admin
         </span>
     </div>
-    
+
     <div class="container body-content">
 
         @RenderBody()
@@ -37,9 +38,10 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
-        </div>
+    </div>
 </body>
 </html>
+
 
 
 

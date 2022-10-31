@@ -34,6 +34,11 @@ namespace HostelManagement.Controllers
          
         }
 
+        public ActionResult Feedback()
+        {
+            return RedirectToAction("Index", "complaint");
+        }
+
         public ActionResult Users(string search=null)
         {
            

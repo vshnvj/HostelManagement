@@ -138,16 +138,7 @@ namespace HostelManagement.Controllers
         // GET: RoomsMvc/Delete/5
         public ActionResult Delete(int? id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Room room = db.Rooms.Find(id);
-            //if (room == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(room);
+           
             HttpClient client = new HttpClient();
             if (id == null)
             {
