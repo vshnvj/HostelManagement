@@ -350,6 +350,8 @@
     <Content Include="Views\complaint\Index.cshtml" />
     <Content Include="Views\complaint\complaintRegistered.cshtml" />
     <Content Include="Views\Shared\View1.cshtml" />
+    <Content Include="Views\UsersHome\TrackRent.cshtml" />
+    <Content Include="Views\UsersHome\Feedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

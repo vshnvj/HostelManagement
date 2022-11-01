@@ -17,7 +17,18 @@ namespace HostelManagement.Controllers
         string allocationUri = "api/AllocationsApi/";
         public ActionResult Index()
         {
-            HttpClient client = new HttpClient();
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                if (Session["username"].ToString() != "1")
+                {
+
+                    return RedirectToAction("Index", "AdminHome");
+                }
+                HttpClient client = new HttpClient();
                 var response = client.GetAsync("http://localhost:64533/api/usersapi");
                 List<User> li = new List<User>();
                 response.Wait();
@@ -30,6 +41,7 @@ namespace HostelManagement.Controllers
                 }
                 li = li.FindAll(x => x.Status == 1);
                 return View(li);
+            }
 
          
         }
@@ -38,6 +50,13 @@ namespace HostelManagement.Controllers
         {
             return RedirectToAction("Index", "complaint");
         }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login", "Home");
+        }
+
 
         public ActionResult Users(string search=null)
         {

@@ -85,13 +85,21 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
+
+
     </div>
 }
-
-
-@*<div>
-    @Html.ActionLink("Cancel ", "Index", "UsersHome", new { id = Model.Id })
+@*<form action=""
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Submit" class="btn" />
+    </div>
 </div>*@
+
+<div>
+    @if (Model.Status == 0) { 
+        @Html.ActionLink("Submit  ", "Requests", new { id = Model.Id })}
+    </div>
 
 
 @section Scripts {

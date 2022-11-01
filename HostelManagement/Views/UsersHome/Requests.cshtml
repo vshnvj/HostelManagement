@@ -1,11 +1,25 @@
-﻿@model string
+﻿@model HostelManagement.Models.User
 @{
     ViewBag.Title = "SeeRequests";
     Layout = "~/Views/Shared/User_Layout.cshtml";
 }
+<div class="navbar fixed-top  navbar-light" style="background-color: #e3f2fd">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Profile", "Edit", new { id = Model.Id })</li>
+        @*<li> @Html.ActionLink("Submit your application", "Requests", new { id = Model.Id })</li>*@
+        <li> @Html.ActionLink("Status of appliation", "SeeRequests", new { id = Model.Id }) </li>
+        <li>   @Html.ActionLink("complaint/feedback", "Feedback", "UsersHome", new { id = Model.Id })</li>
 
-<h2>SeeRequests</h2>
+        <li>   @Html.ActionLink("track rent", "TrackRent", new { id = Model.Id })</li>
 
-@ViewData["Status"]
 
-@Model
+        <li>@Html.ActionLink("Logout", "Logout", "UsersHome")</li>
+
+    </ul>
+    </div>
+    <h2>SeeRequests</h2>
+
+
+    @ViewData["success"]
+
+  

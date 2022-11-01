@@ -56,9 +56,23 @@ namespace HostelManagement.Controllers
         }
 
         // GET: complaint/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            HttpClient client = new HttpClient();
+
+            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
+
+            User user = new User();
+            response.Wait();
+            var test = response.Result;
+            if (test.IsSuccessStatusCode)
+            {
+                var r = test.Content.ReadAsAsync<User>();
+                //r.Wait();
+                user = r.Result;
+            }
+            return View(user);
+            //return View();
         }
 
         // POST: complaint/Create
@@ -66,9 +80,11 @@ namespace HostelManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,sub,details")] complaint complaint)
+        public async Task<ActionResult> Create(int? id,string sub,string details)
         {
-           
+            complaint complaint = new complaint();
+            complaint.sub = sub;
+            complaint.details = details;
             HttpClient client = new HttpClient();
             var response = client.PostAsJsonAsync<complaint>(uri, complaint);
             response.Wait();
@@ -76,7 +92,9 @@ namespace HostelManagement.Controllers
             if (test.IsSuccessStatusCode)
             {
                 //return RedirectToAction("Index");
-                return View("complaintRegistered");
+
+
+                return RedirectToAction("Index", "UsersHome",new { id = id});
 
             }
             return View();

@@ -13,19 +13,21 @@ namespace HostelManagement.Controllers
         // GET: UsersHome
         User user;
         HttpClient client = new HttpClient();
-        public ActionResult Index(int id)
+        public ActionResult Index(int? id)
         {
-            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
-            User li = new User();
+            //var response = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
+            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
+
+            user = new User();
             response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
                 var r = test.Content.ReadAsAsync<User>();
                 //r.Wait();
-                li = r.Result;
+                user= r.Result;
             }
-            return View(li);
+            return View(user);
            
         }
 
@@ -34,13 +36,80 @@ namespace HostelManagement.Controllers
             return RedirectToAction("Edit", "Users", new { id = id });
         }
 
-        public ActionResult Feedback()
+        public ActionResult Feedback(int? id)
         {
-            return RedirectToAction("Create", "complaint");
+            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
+
+            user = new User();
+            response.Wait();
+            var test = response.Result;
+            if (test.IsSuccessStatusCode)
+            {
+                var r = test.Content.ReadAsAsync<User>();
+                //r.Wait();
+                user = r.Result;
+            }
+
+            return View(user);
+
         }
 
-        public ActionResult Requests(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Feedback(int? id, string sub, string details)
         {
+            complaint complaint = new complaint();
+            complaint.sub = sub;
+            complaint.details = details;
+            HttpClient client = new HttpClient();
+            var response = client.PostAsJsonAsync<complaint>("http://localhost:64533/api/complaintapi/", complaint);
+            response.Wait();
+            var test = response.Result;
+            if (test.IsSuccessStatusCode)
+            {
+                //return RedirectToAction("Index");
+
+
+                return RedirectToAction("Index", "UsersHome", new { id = id });
+
+            }
+            return View();
+        }
+
+        public ActionResult TrackRent(int? id)
+        {
+
+        var response = client.GetAsync("http://localhost:64533/api/paymentsapi/");
+        List<Payment> li = new List<Payment>();
+        response.Wait();
+            var test = response.Result;
+            if (test.IsSuccessStatusCode)
+            {
+                var pays = test.Content.ReadAsAsync<List<Payment>>();
+        pays.Wait();
+                li = pays.Result;
+                li = li.FindAll(x=>x.User_id==id);
+            }
+            ViewBag.List = li;
+
+
+            var response1 = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
+            User l = new User();
+            response.Wait();
+            var test1 = response1.Result;
+            if (test1.IsSuccessStatusCode)
+            {
+                var r = test1.Content.ReadAsAsync<User>();
+                //r.Wait();
+                l = r.Result;
+            }
+            return View(l);
+
+    }
+
+    public ActionResult Requests(int? id)
+        {
+           
            
             var response = client.GetAsync("http://localhost:64533/requestsent?id=" + id.ToString());
             response.Wait();
@@ -56,7 +125,7 @@ namespace HostelManagement.Controllers
             }
 
             //return Content("<script>alert('Request sent successfully')</script>");
-            return View((object)s);
+            return View(user1);
         }
 
         public ActionResult SeeRequests(int? id)
@@ -80,7 +149,15 @@ namespace HostelManagement.Controllers
                     ViewData["Status"] = "Applied";
                 
             }
-            return  View();
+            return  View(u);
         }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login", "Home");
         }
+
+    }
+
     }

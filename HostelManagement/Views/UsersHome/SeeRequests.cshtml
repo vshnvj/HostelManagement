@@ -4,10 +4,25 @@
     Layout = "~/Views/Shared/User_Layout.cshtml";
 }
 
+
+<div class="navbar fixed-top  navbar-light" style="background-color: #e3f2fd">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Profile", "Edit", new { id = Model.Id })</li>
+        @*<li> @Html.ActionLink("Submit your application", "Requests", new { id = Model.Id })</li>*@
+        <li> @Html.ActionLink("Status of appliation", "SeeRequests", new { id = Model.Id }) </li>
+        <li>   @Html.ActionLink("complaint/feedback", "Feedback", "UsersHome", new { id = Model.Id })</li>
+
+        <li>   @Html.ActionLink("track rent", "TrackRent", new { id = Model.Id })</li>
+
+        <li>@Html.ActionLink("Logout", "Logout", "UsersHome")</li>
+
+    </ul>
+    </div>
 <h2>Sent Requests</h2>
-@{
-    if (ViewData["Status"]!=null)
-    {<h5>status: </h5>@ViewData["Status"];
-}
-}
+
+    @{
+        if (ViewData["Status"] != null)
+        {<h5>status: </h5>@ViewData["Status"];
+    }
+    }
 
