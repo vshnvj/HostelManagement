@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/Admin_layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Feedbacks</h2>
 
 
 <table  class="table table-bordered">
@@ -28,7 +28,7 @@
             @Html.DisplayFor(modelItem => item.details)
         </td>
         <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new { @class = "btn btn-danger btn-sm my-1 my-sm-0" })
         </td>
     </tr>
 }

@@ -9,7 +9,7 @@
         <li>@Html.ActionLink("Profile", "Edit", new { id = Model.Id })</li>
         @*<li> @Html.ActionLink("Submit your application", "Requests", new { id = Model.Id })</li>*@
         <li> @Html.ActionLink("Status of appliation", "SeeRequests", new { id = Model.Id }) </li>
-        <li>   @Html.ActionLink("complaint/feedback", "Feedback", "UsersHome", new { id = Model.Id })</li>
+        <li>   @Html.ActionLink("Feedback", "Feedback", "UsersHome", new { id = Model.Id })</li>
 
         <li>   @Html.ActionLink("track rent", "TrackRent", new { id = Model.Id })</li>
 
@@ -17,14 +17,13 @@
 
     </ul>
 </div>
-<h2>Create</h2>
+<h2>Feedback</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-        <h4>Feedback</h4>
         <hr />
 
         <form action="" method="post">
@@ -49,7 +48,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Submit" class="btn btn-primary" />
                 </div>
             </div>
         </form>

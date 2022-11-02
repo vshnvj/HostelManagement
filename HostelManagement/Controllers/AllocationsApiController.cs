@@ -43,6 +43,7 @@ namespace HostelManagement.Controllers
             return Ok(all);
         }
 
+     
         // PUT: api/AllocationsApi/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutAllocation(int id, Allocation allocation)

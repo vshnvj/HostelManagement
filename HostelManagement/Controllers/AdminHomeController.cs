@@ -1,6 +1,7 @@
 ﻿using HostelManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -143,15 +144,19 @@ namespace HostelManagement.Controllers
             return RedirectToAction("Delete", "Rooms", new { id = id });
         }
 
-        public ActionResult TrackRent()
+       
+        public ActionResult TrackRent(string month=null,string year=null)
         {
-          
 
             var list = AllRents();
+            if (month == null)
+                return View(list);
+            
+            list = list.FindAll(x => (x.Date_of_payment.Value.Month.ToString() == month )&&
+            (x.Date_of_payment.Value.Year.ToString() == year));
 
-
-            return View(list);
-
+            
+             return View(list);
 
         }
 
