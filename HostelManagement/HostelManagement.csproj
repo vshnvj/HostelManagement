@@ -302,6 +302,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Sql.txt" />
+    <Content Include="Views\Images\bc.jpg" />
+    <Content Include="Views\Images\nick-samoylov-GrLnSHJT1fI-unsplash.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

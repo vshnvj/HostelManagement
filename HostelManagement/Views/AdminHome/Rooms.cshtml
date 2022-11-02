@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "Create","Rooms")
 </p>
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Room_no)
@@ -45,7 +45,6 @@
         @Html.ActionLink("Edit", "Edit", new { id = item.Room_no }) |
         @Html.ActionLink("Details", "Details", new { id = item.Room_no }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.Room_no })
-
     </td>
 </tr>
 }
