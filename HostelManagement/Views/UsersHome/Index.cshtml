@@ -12,24 +12,17 @@
         <li>   @Html.ActionLink("Feedback", "Feedback", "UsersHome", new { id = Model.Id })</li>
         <li>   @Html.ActionLink("track rent", "TrackRent", new { id = Model.Id })</li>
 
-        <li>@Html.ActionLink("Logout", "Logout", "UsersHome")</li>
-
-    </ul>
-
-</div>
+<h2>Welcome , @Model.Name  </h2>
 
 
-    @*<h2>Welcome , @Model.Name  </h2>
+@Html.ActionLink("Profile", "Edit", new { id = Model.Id }) |
 
 
-        @Html.ActionLink("Profile", "Edit", new { id = Model.Id }) |
+@Html.ActionLink("Submit your application", "Requests", new { id = Model.Id }) |
+
+@Html.ActionLink("Status of appliation", "SeeRequests", new { id = Model.Id }) |
+
+@Html.ActionLink("complaint/feedback", "Feedback")
 
 
-        @Html.ActionLink("Submit your application", "Requests", new { id = Model.Id }) |
-
-        @Html.ActionLink("Status of appliation", "SeeRequests", new { id = Model.Id }) |
-
-        @Html.ActionLink("complaint/feedback", "Feedback")
-
-
-        @ViewData["success"]*@
+@ViewData["success"]

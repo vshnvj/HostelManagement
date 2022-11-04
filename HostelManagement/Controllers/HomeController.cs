@@ -10,27 +10,11 @@ namespace HostelManagement.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Login()
+        public ActionResult Index()
         {
-            if (Session["username"] != null)
-            {
+            ViewBag.Title = "Home Page";
 
-                if (Session["username"].ToString() == "1")
-                {
-
-                    return RedirectToAction("Index", "AdminHome");
-                }
-
-                else
-                {
-                    return RedirectToAction("Index", "UsersHome", new { id = Session["username"].ToString() });
-                }
-            }
-            else {
-                ViewBag.Title = "Home Page";
-
-                return View();
-            }
+            return View();
         }
 
         [HttpPost]
@@ -49,17 +33,11 @@ namespace HostelManagement.Controllers
                 User u = pass.Result;
                 if (u.Password==password)
                 {
-                    if (u.Role_id == 1)
-                    {
-                        Session["username"] = u.Id;
-                        return RedirectToAction("Index", "AdminHome");
-                    }
+                    if(u.Role_id==1)
+                    return RedirectToAction("Index", "AdminHome");
 
                     else
-                    {
-                        Session["username"] = u.Id;
-                        return RedirectToAction("Index", "UsersHome", new { id = Session["username"].ToString() });
-                    }
+                        return RedirectToAction("Index", "UsersHome", new { id = u.Id });
 
                 }
 

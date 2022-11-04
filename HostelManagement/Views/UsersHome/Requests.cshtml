@@ -1,4 +1,4 @@
-﻿@model HostelManagement.Models.User
+﻿@model string
 @{
     ViewBag.Title = "SeeRequests";
     Layout = "~/Views/Shared/User_Layout.cshtml";
@@ -12,14 +12,8 @@
 
         <li>   @Html.ActionLink("track rent", "TrackRent", new { id = Model.Id })</li>
 
+<h2>SeeRequests</h2>
 
-        <li>@Html.ActionLink("Logout", "Logout", "UsersHome")</li>
+@ViewData["Status"]
 
-    </ul>
-    </div>
-    <h2>SeeRequests</h2>
-
-
-    @ViewData["success"]
-
-  
+@Model

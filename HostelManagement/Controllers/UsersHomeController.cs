@@ -15,19 +15,17 @@ namespace HostelManagement.Controllers
         HttpClient client = new HttpClient();
         public ActionResult Index()
         {
-            //var response = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
-            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
-
-            user = new User();
+            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
+            User li = new User();
             response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
                 var r = test.Content.ReadAsAsync<User>();
                 //r.Wait();
-                user= r.Result;
+                li = r.Result;
             }
-            return View(user);
+            return View(li);
            
         }
 
@@ -38,20 +36,7 @@ namespace HostelManagement.Controllers
 
         public ActionResult Feedback()
         {
-            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
-
-            user = new User();
-            response.Wait();
-            var test = response.Result;
-            if (test.IsSuccessStatusCode)
-            {
-                var r = test.Content.ReadAsAsync<User>();
-                //r.Wait();
-                user = r.Result;
-            }
-
-            return View(user);
-
+            return RedirectToAction("Create", "complaint");
         }
 
         [HttpPost]
@@ -125,7 +110,7 @@ namespace HostelManagement.Controllers
             }
 
             //return Content("<script>alert('Request sent successfully')</script>");
-            return View(user1);
+            return View((object)s);
         }
 
         public ActionResult SeeRequests()
@@ -142,22 +127,12 @@ namespace HostelManagement.Controllers
                 u = re.Result;
                 if (u.Status == 2)
                    ViewData["Status"]="Approved";
-                if (u.Status == 3)
-                    ViewData["Status"] = "Rejected";
                 else
                 if (u.Status == 1)
                     ViewData["Status"] = "Applied";
                 
             }
-            return  View(u);
+            return  View();
         }
-
-        public ActionResult Logout()
-        {
-            Session.Abandon();
-            return RedirectToAction("Login", "Home");
         }
-
-    }
-
     }

@@ -75,8 +75,7 @@ namespace HostelManagement.Controllers
             {
                 var us = test.Content.ReadAsAsync<User>();
                 User user1 = us.Result;
-                //return RedirectToAction("Index", "UsersHome", new { id = user1.Id });
-                return RedirectToAction("Login", "Home");
+                return RedirectToAction("Index", "UsersHome", new { id = user1.Id });
             }
             return View();
         }
@@ -182,11 +181,6 @@ namespace HostelManagement.Controllers
 
 
 
-        }
-
-        public ActionResult Requests(int? id)
-        {
-            return RedirectToAction("Requests", "UsersHome", new { id = id });
         }
 
 

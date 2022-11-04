@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -76,25 +75,30 @@ namespace HostelManagement.Controllers
         [ResponseType(typeof(complaint))]
         public async Task<IHttpActionResult> Postcomplaint(complaint complaint)
         {
-            string con = "data source=(localdb)\\ProjectsV13;initial catalog=HostelDatabase;integrated security=True";
-            SqlConnection conn = new SqlConnection(con);
-            conn.Open();
-            SqlCommand command = new SqlCommand(@"INSERT INTO [dbo].[complaint] ( [sub], [details]) 
-                                                                     values  (@u1, @u2)", conn);
-
-            command.Parameters.AddWithValue("@u1", complaint.sub);
-            command.Parameters.AddWithValue("@u2",complaint.details);
-
-            int r;
-
-            r = command.ExecuteNonQuery();
-
-            if (r > 0)
+            if (!ModelState.IsValid)
             {
-
-                return Ok();
+                return BadRequest(ModelState);
             }
-            return BadRequest();
+
+            db.complaints.Add(complaint);
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (complaintExists(complaint.Id))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = complaint.Id }, complaint);
         }
 
         // DELETE: api/complaintApi/5

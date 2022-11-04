@@ -1,0 +1,35 @@
+﻿@model HostelManagement.Models.complaint
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Admin_layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>complaint</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sub)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sub)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.details)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
