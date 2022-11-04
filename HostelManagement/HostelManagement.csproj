@@ -226,6 +226,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Hostel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +354,7 @@
     <Content Include="Views\Shared\View1.cshtml" />
     <Content Include="Views\UsersHome\TrackRent.cshtml" />
     <Content Include="Views\UsersHome\Feedback.cshtml" />
+    <Content Include="Views\AdminHome\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

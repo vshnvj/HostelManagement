@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -43,7 +44,73 @@ namespace HostelManagement.Controllers
             return Ok(all);
         }
 
-     
+
+        [Route("GetAllTrackRent")]
+        [ResponseType(typeof(Allocation))]
+        public async Task<IHttpActionResult> GetAllTrackRent(string month,string year)
+        {
+            //var allocation = db.Allocations.Include(x => x.User).Include(x => x.Room).ToList();
+            //Allocation all = allocation.Find(x => x.User_id == id);
+            //string con = "data source=(localdb)\\ProjectsV13;initial catalog=HostelDatabase;integrated security=True";
+            //SqlConnection conn = new SqlConnection(con);
+            //conn.Open();
+            //SqlCommand command = new SqlCommand(@"select a.User_id,
+            //                                            a.room_no,p.date_of_payment,p.amount    
+            //                                            from allocation a 
+            //                                        left join payment p
+            //                                        on p.User_id=a.User_id", conn);
+
+            //List<ViewModel> v = new List<ViewModel>();
+            //SqlDataReader r = command.ExecuteReader();
+            //while (r.Read())
+            //{
+
+            //    int uid = int.Parse(r[0].ToString());
+            //    int room_no = int.Parse(r[1].ToString());
+            //    ViewModel view = new ViewModel();
+            //    view.user = db.Users.Find(uid);
+            //    view.room = db.Rooms.Find(room_no);
+
+
+
+            //        view.date_of_payment = DateTime.Parse(r[2].ToString());
+
+            //        view.amount = int.Parse(r[3].ToString());
+
+
+
+
+            //    v.Add(view);
+
+            //}
+            //return Ok(v);
+
+            
+            var temp = db.Payments.ToList().FindAll(x => x.Date_of_payment.Value.Month.ToString() == month
+                                                            && x.Date_of_payment.Value.Year.ToString()==year);
+          
+            var allrents = from all in db.Allocations.Include(x => x.Room).Include(x => x.User).ToList()
+                           join pay in temp.ToList()
+                           on all.User_id equals pay.User_id
+                           into data_A
+                           from data_B in data_A.DefaultIfEmpty(new Payment())
+                           select new
+                           {
+                               all.Room_no,
+                               all.User_id,
+                               all.User.Name,
+                               all.User.Mobile,
+                               all.Room.Rent,
+                               date_of_payment = data_B.Date_of_payment,
+                               Amount = data_B.Amount
+                           };
+           
+            return Ok(allrents);
+
+
+        }
+
+
         // PUT: api/AllocationsApi/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutAllocation(int id, Allocation allocation)

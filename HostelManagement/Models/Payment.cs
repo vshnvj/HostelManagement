@@ -13,6 +13,7 @@ namespace HostelManagement.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web.Mvc;
 
     public partial class Payment
     {
@@ -21,6 +22,7 @@ namespace HostelManagement.Models
         public int Id { get; set; }
         public Nullable<int> User_id { get; set; }
         [Required]
+
         public Nullable<int> Amount { get; set; }
         
         [Required]

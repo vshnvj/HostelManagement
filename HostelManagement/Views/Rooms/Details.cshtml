@@ -1,45 +1,68 @@
-﻿@model HostelManagement.Models.Room
+﻿@model IEnumerable<HostelManagement.Models.Allocation>
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/Admin_layout.cshtml";
 }
 
-<h2>Details</h2>
 
 <div>
-    <h4>Room</h4>
+    <div>
+        <h2>Room no. : @Model.FirstOrDefault().Room_no</h2>
+        <h5>Capacity : @Model.FirstOrDefault().Room.Capacity</h5>
+        <h5>Availble : @Model.FirstOrDefault().Room.available</h5>
+        <h5>Rent Rs. : @Model.FirstOrDefault().Room.Rent</h5>
+    </div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Capacity)
-        </dt>
+    <h4>Guests list</h4>
+    <table class="table table-striped table-bordered">
+        <tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Capacity)
-        </dd>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_of_allocation)
+            </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.available)
-        </dt>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Address)
+            </th>
+           
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.available)
-        </dd>
+        @foreach (var item in Model)
+        {
+    <tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Rent)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Rent)
-        </dd>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Mobile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_of_allocation)
+        </td>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Room_no }) |
-    @*@Html.ActionLink("Back to List", "Index")*@
-    @Html.ActionLink("Back to List", "Rooms", "AdminHome")
+    </tr>
+        }
+        </table>
 
-</p>
+        <div>
+            @*@Html.ActionLink("Back to List", "Index")*@
+            @Html.ActionLink("Back to List", "Rooms", "AdminHome", new { }, new { @class = "btn btn-primary" })
+
+        </div>
+    </div>
+
+
+
+

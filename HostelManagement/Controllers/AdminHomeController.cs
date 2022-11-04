@@ -61,26 +61,31 @@ namespace HostelManagement.Controllers
 
         public ActionResult Users(string search=null)
         {
-           
-            HttpClient client = new HttpClient();
-            var response = client.GetAsync("http://localhost:64533/api/usersapi");
-            List<User> li = new List<User>();
-            response.Wait();
-            var test = response.Result;
-            if (test.IsSuccessStatusCode)
+            if (Session["username"] == null)
             {
-                var rooms = test.Content.ReadAsAsync<List<User>>();
-                rooms.Wait();
-                li = rooms.Result;
-                if (search != null)
-                {
-                    li = li.FindAll(x => x.Name.ToLower() == search.ToLower());
-
-                }
+                return RedirectToAction("Login", "Home");
             }
-            li = li.FindAll(x => x.Status == 2 && x.Role_id!=1);
-            return View(li);
+            else
+            {
+                HttpClient client = new HttpClient();
+                var response = client.GetAsync("http://localhost:64533/api/usersapi");
+                List<User> li = new List<User>();
+                response.Wait();
+                var test = response.Result;
+                if (test.IsSuccessStatusCode)
+                {
+                    var rooms = test.Content.ReadAsAsync<List<User>>();
+                    rooms.Wait();
+                    li = rooms.Result;
+                    if (search != null)
+                    {
+                        li = li.FindAll(x => x.Name.ToLower() == search.ToLower());
 
+                    }
+                }
+                li = li.FindAll(x => x.Status == 2 && x.Role_id != 1);
+                return View(li);
+            }
 
         }
 
@@ -95,40 +100,54 @@ namespace HostelManagement.Controllers
         
         public ActionResult AllocatedRooms()
         {
-            HttpClient client = new HttpClient();
-
-
-            string uri = "http://localhost:64533/api/AllocationsApi/";
-            var response = client.GetAsync(uri);
-            response.Wait();
-            var test = response.Result;
-            List<Allocation> list = new List<Allocation>();
-            if (test.IsSuccessStatusCode)
+            if (Session["username"] == null)
             {
-                var employees = test.Content.ReadAsAsync<List<Allocation>>();
-                employees.Wait();
-                list = employees.Result;
-
+                return RedirectToAction("Login", "Home");
             }
-            return View(list);
+            else
+            {
+                HttpClient client = new HttpClient();
+
+
+                string uri = "http://localhost:64533/api/AllocationsApi/";
+                var response = client.GetAsync(uri);
+                response.Wait();
+                var test = response.Result;
+                List<Allocation> list = new List<Allocation>();
+                if (test.IsSuccessStatusCode)
+                {
+                    var employees = test.Content.ReadAsAsync<List<Allocation>>();
+                    employees.Wait();
+                    list = employees.Result;
+
+                }
+                return View(list);
+            }
         }
         
 
         public ActionResult Rooms()
         {
-            string uri = "http://localhost:64533/api/roomsapi/";
-            List<Room> r_list = new List<Room>();
-            var response = client.GetAsync(uri);
-
-          response.Wait();
-            var test = response.Result;
-            if (test.IsSuccessStatusCode)
+            if (Session["username"] == null)
             {
-                var employees = test.Content.ReadAsAsync<List<Room>>();
-                employees.Wait();
-                r_list = employees.Result;
+                return RedirectToAction("Login", "Home");
             }
-            return View(r_list);
+            else
+            {
+                string uri = "http://localhost:64533/api/roomsapi/";
+                List<Room> r_list = new List<Room>();
+                var response = client.GetAsync(uri);
+
+                response.Wait();
+                var test = response.Result;
+                if (test.IsSuccessStatusCode)
+                {
+                    var employees = test.Content.ReadAsAsync<List<Room>>();
+                    employees.Wait();
+                    r_list = employees.Result;
+                }
+                return View(r_list);
+            }
         }
 
         public ActionResult Edit(int? id)
@@ -147,17 +166,41 @@ namespace HostelManagement.Controllers
        
         public ActionResult TrackRent(string month=null,string year=null)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                if (month == null)
+            {
+                month = System.DateTime.Now.Month.ToString();
+                    year = System.DateTime.Now.Year.ToString();
+            }
+            HttpClient client = new HttpClient();
 
-            var list = AllRents();
-            if (month == null)
-                return View(list);
-            
-            list = list.FindAll(x => (x.Date_of_payment.Value.Month.ToString() == month )&&
-            (x.Date_of_payment.Value.Year.ToString() == year));
 
-            
-             return View(list);
+                string uri = "http://localhost:64533/GetAllTrackRent?month="+month+"&year="+year;
+                var response = client.GetAsync(uri);
+                response.Wait();
+                var test = response.Result;
+                List<ViewModel> list = new List<ViewModel>();
+            if (test.IsSuccessStatusCode)
+            {
+                var employees = test.Content.ReadAsAsync<List<ViewModel>>();
+                employees.Wait();
+                list = employees.Result;
+                //return View(list);
 
+                if (month == null)
+                {
+                    return View(list);
+                }
+               
+            }
+
+            return View(list);
+            }
         }
 
 

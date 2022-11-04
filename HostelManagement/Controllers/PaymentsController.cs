@@ -50,17 +50,15 @@ namespace HostelManagement.Controllers
             return View(payment);
         }
 
+
         // GET: Payments/Create
         public ActionResult Create(int? id)
         {
             ViewBag.User_id = id;
-                //new SelectList(db.Users, "Id", "Name");
             return View();
         }
 
-        // POST: Payments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,User_id,Amount,Date_of_payment")] Payment payment)
@@ -136,6 +134,12 @@ namespace HostelManagement.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+
+       
+
+
+
 
         protected override void Dispose(bool disposing)
         {
