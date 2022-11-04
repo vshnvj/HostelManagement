@@ -13,7 +13,7 @@ namespace HostelManagement.Controllers
         // GET: UsersHome
         User user;
         HttpClient client = new HttpClient();
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
             var response = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
             User li = new User();
@@ -29,9 +29,9 @@ namespace HostelManagement.Controllers
            
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            return RedirectToAction("Edit", "Users", new { id = id });
+            return RedirectToAction("Edit", "Users", new { id = Session["username"] } );
         }
 
         public ActionResult Feedback()
@@ -39,10 +39,64 @@ namespace HostelManagement.Controllers
             return RedirectToAction("Create", "complaint");
         }
 
-        public ActionResult Requests(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Feedback( string sub, string details)
+        {
+            complaint complaint = new complaint();
+            complaint.sub = sub;
+            complaint.details = details;
+            HttpClient client = new HttpClient();
+            var response = client.PostAsJsonAsync<complaint>("http://localhost:64533/api/complaintapi/", complaint);
+            response.Wait();
+            var test = response.Result;
+            if (test.IsSuccessStatusCode)
+            {
+                //return RedirectToAction("Index");
+
+
+                return RedirectToAction("Index", "UsersHome", new { id = Session["username"] });
+
+            }
+            return View();
+        }
+
+        public ActionResult TrackRent()
+        {
+
+        var response = client.GetAsync("http://localhost:64533/api/paymentsapi/");
+        List<Payment> li = new List<Payment>();
+        response.Wait();
+            var test = response.Result;
+            if (test.IsSuccessStatusCode)
+            {
+                var pays = test.Content.ReadAsAsync<List<Payment>>();
+        pays.Wait();
+                li = pays.Result;
+                li = li.FindAll(x=>x.User_id == int.Parse(Session["username"].ToString()));
+            }
+            ViewBag.List = li;
+
+
+            var response1 = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
+            User l = new User();
+            response.Wait();
+            var test1 = response1.Result;
+            if (test1.IsSuccessStatusCode)
+            {
+                var r = test1.Content.ReadAsAsync<User>();
+                //r.Wait();
+                l = r.Result;
+            }
+            return View(l);
+
+    }
+
+    public ActionResult Requests()
         {
            
-            var response = client.GetAsync("http://localhost:64533/requestsent?id=" + id.ToString());
+           
+            var response = client.GetAsync("http://localhost:64533/requestsent?id=" + Session["username"].ToString());
             response.Wait();
             User user1=new User();
             var test = response.Result;
@@ -59,11 +113,11 @@ namespace HostelManagement.Controllers
             return View((object)s);
         }
 
-        public ActionResult SeeRequests(int? id)
+        public ActionResult SeeRequests()
         {
             HttpClient client = new HttpClient();
 
-            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
+            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
             response.Wait();
             var test = response.Result;
             User u = new User();

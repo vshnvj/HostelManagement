@@ -7,7 +7,7 @@
 
 <h2>AllocatedRooms</h2>
 
-<table class="table">
+<table class="table table-striped table-bordered">
     <tr>
 
         <th>
@@ -49,8 +49,8 @@
     </td>
     <td>
         @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
-        @Html.ActionLink("Add Payment", "AddRent", new { id = item.Id }) |
-        @Html.ActionLink("Deallocate", "Deallocate", new { id = item.Id })
+        @Html.ActionLink("Add Payment", "AddRent", new { id = item.Id }, new { @class = "btn btn-success btn-sm my-2 my-sm-0" }) 
+        @Html.ActionLink("Deallocate", "Deallocate", new { id = item.Id }, new { @class = "btn btn-danger btn-sm my-2 my-sm-0" })
     </td>
 </tr>
 }

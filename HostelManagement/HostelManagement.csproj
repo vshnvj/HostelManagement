@@ -226,6 +226,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Hostel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +294,7 @@
       <DependentUpon>Complaint.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\css\StyleSheet1.css" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -352,6 +354,9 @@
     <Content Include="Views\complaint\Index.cshtml" />
     <Content Include="Views\complaint\complaintRegistered.cshtml" />
     <Content Include="Views\Shared\View1.cshtml" />
+    <Content Include="Views\UsersHome\TrackRent.cshtml" />
+    <Content Include="Views\UsersHome\Feedback.cshtml" />
+    <Content Include="Views\AdminHome\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,9 +8,9 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("+", "Create",new { @class="bi bi-plus"})
 </p>
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Capacity)
@@ -36,7 +36,8 @@
             @Html.DisplayFor(modelItem => item.Rent)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Room_no }) |
+            
+            @Html.ActionLink("Edit", "Edit", new { id=item.Room_no}) |
             @Html.ActionLink("Details", "Details", new { id=item.Room_no }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Room_no })
         </td>

@@ -5,36 +5,23 @@
 
 @*<h2>Login failed</h2>*@
 
-<div>
-<form action="" method="post" class="form1">
+<div class="log-form">
+<form action="" method="post" >
 
-    <div class="form-group">
 
         <p>Email:</p>
 
         <input type="email" name="email" class="form-control" required />
 
-    </div>
-    <div class="form-group">
-
-        <p>Password:</p>
+        Password:
 
         <input type="password" name="password" class="form-control" required />
-    </div>
-    <div>
-        <input type="submit" value="Login" class="btn btn-primary" />
-        @Html.ActionLink("Register", "Create", "Users",new { @class = "btn btn-primary" })
-    </div>
+   
+    <input type="submit" value="Login" class="btn btn-primary" />
+
 </form>
 <br />
+<div>
+    @Html.ActionLink("Register", "Create", "Users")
 </div>
-<style>
-    form1{
-        
-    }
-    p{
-        resize:horizontal;
-        font-family:sans-serif;
-        font-size:20px;
-    }
-</style>
+</div>

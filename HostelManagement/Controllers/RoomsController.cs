@@ -37,17 +37,17 @@ namespace HostelManagement.Controllers
         public ActionResult Details(int? id)
         {
             HttpClient client = new HttpClient();
-            var response = client.GetAsync(uri+ id.ToString());
-            Room room = new Room();
+            var response = client.GetAsync("http://localhost:64533/GetRoomGuets?id=" + id.ToString());
+            List<Allocation> list = new List<Allocation>();
             response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
-                var r = test.Content.ReadAsAsync<Room>();
+                var r = test.Content.ReadAsAsync<List<Allocation>>();
                 //r.Wait();
-                room = r.Result;
+                list= r.Result;
             }
-            return View(room);
+            return View(list);
         }
 
 
