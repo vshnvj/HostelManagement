@@ -69,6 +69,8 @@ namespace HostelManagement.Controllers
             {
                 return BadRequest();
             }
+            //room
+            //Room r1=db.Rooms.Find(id);
 
             db.Entry(room).State = EntityState.Modified;
 

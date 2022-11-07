@@ -42,12 +42,12 @@ namespace HostelManagement.Controllers
             var response=client.GetAsync("http://localhost:64533/GetUserByEmail?email=" + email);
             response.Wait();
             var test = response.Result;
-            if(test.IsSuccessStatusCode)
+            if (test.IsSuccessStatusCode)
             {
                 var pass = test.Content.ReadAsAsync<User>();
                 pass.Wait();
                 User u = pass.Result;
-                if (u.Password==password)
+                if (u.Password == password)
                 {
                     if (u.Role_id == 1)
                     {
@@ -63,8 +63,10 @@ namespace HostelManagement.Controllers
 
                 }
 
-                //else
-                //ViewData[""]
+                else
+                {
+                    TempData["failed"] = "Invalid username or password.";
+            } 
             }
 
             return View();

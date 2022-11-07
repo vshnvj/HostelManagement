@@ -1,4 +1,12 @@
-﻿
+﻿<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>@ViewBag.Title</title>
+
+<div class="p-5 text-center bg-light">
+    <h1 class="mb-3">Hostel Management system</h1>
+
+
+</div>
 @{
     ViewBag.Title = "Login";
 }
@@ -6,9 +14,16 @@
 @*<h2>Login failed</h2>*@
 
 <div class="log-form">
-<form action="" method="post" >
+    <form action="" method="post">
 
-
+        @{ 
+            if(TempData.ContainsKey("failed"))
+            {
+                <div class="danger alert-danger" >
+                    @TempData["failed"]
+                </div>
+            }
+        }
         Email:
 
         <input type="email" name="email" class="form-control" required />
@@ -16,12 +31,12 @@
         Password:
 
         <input type="password" name="password" class="form-control" required />
-   
-    <input type="submit" value="Login" class="btn btn-primary" />
 
-</form>
-<br />
-<div>
-    @Html.ActionLink("Register", "Create", "Users")
-</div>
+        <input type="submit" value="Login" class="btn btn-primary" />
+
+    </form>
+    <br />
+    <div>
+        @Html.ActionLink("Register", "Create", "Users", new { }, new { @class = "btn btn-info" })
+    </div>
 </div>

@@ -11,9 +11,21 @@
 
 
     </div>
-    <h5  align="right" style="padding-right:4em">Hello, @Model.Name</h5>
+    <h5 align="right" style="padding-right:4em">Hello, @Model.Name</h5>
 
 
+    <div class="navbar fixed-top  navbar-light" style="background-color: #e3f2fd">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Profile", "Edit","UsersHome",new { }, new { id = Model.Id })</li>
+            <li> @Html.ActionLink("Status of appliation", "SeeRequests", "UsersHome", new { }, new { id = Model.Id }) </li>
+            <li>   @Html.ActionLink("Feedback", "Feedback","UsersHome", new { }, new { id = Model.Id })</li>
+
+            <li>   @Html.ActionLink("track rent", "TrackRent", "UsersHome", new { }, new { id = Model.Id })</li>
+
+            <li>@Html.ActionLink("Logout", "Logout", "UsersHome")</li>
+
+        </ul>
+    </div>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>

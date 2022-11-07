@@ -100,7 +100,7 @@ namespace HostelManagement.Controllers
                                all.User_id,
                                all.User.Name,
                                all.User.Mobile,
-                               all.Room.Rent,
+                               Rent=int.Parse(all.Room.Rent.ToString()),
                                date_of_payment = data_B.Date_of_payment,
                                Amount = data_B.Amount
                            };

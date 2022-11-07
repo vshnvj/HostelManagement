@@ -1,8 +1,16 @@
 ﻿@model HostelManagement.Models.User
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>@ViewBag.Title</title>
 
+<div class="p-5 text-center bg-light">
+    <h1 class="mb-3">Hostel Management system</h1>
+
+
+</div>
 @{
     ViewBag.Title = "Create";
-    
+
 
 }
 
@@ -14,7 +22,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>User</h4>
+        <h4>Register</h4>
         <hr />
 
 
@@ -31,7 +39,7 @@
             @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })*@
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })*@
                 <select name="Gender">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -85,8 +93,8 @@
 }
 
 <div>
-        @Html.ActionLink("Back", "Index","Home")
-    </div>
+    @Html.ActionLink("Back", "Login", "Home",new { },new { @class="btn btn-primary"})
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

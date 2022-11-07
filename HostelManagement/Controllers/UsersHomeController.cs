@@ -15,10 +15,8 @@ namespace HostelManagement.Controllers
         HttpClient client = new HttpClient();
         public ActionResult Index()
         {
-            //var response = client.GetAsync("http://localhost:64533/api/usersapi/" + id.ToString());
             var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
-
-            user = new User();
+            User li = new User();
             response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
