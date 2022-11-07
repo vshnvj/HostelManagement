@@ -6,9 +6,11 @@
 }
 
 <h2>Feedbacks</h2>
+<hr />
 
 
-<table class="table">
+
+<table class="table table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.sub)
@@ -19,18 +21,19 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.sub)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.details)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new { @class = "btn btn-danger btn-sm my-1 my-sm-0" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.sub)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.details)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm my-1 my-sm-0" })
+            </td>
+        </tr>
+    }
 
 </table>
