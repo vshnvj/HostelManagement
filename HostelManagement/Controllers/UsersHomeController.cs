@@ -141,7 +141,7 @@ namespace HostelManagement.Controllers
                 if (u.Status == 2)
                    ViewData["Status"]="Approved";
                 if (u.Status == 3)
-                    ViewData["Status"] = "Rejected";
+                    ViewData["Status"] = "Deallocated";
                 else
                 if (u.Status == 1)
                     ViewData["Status"] = "Applied";
