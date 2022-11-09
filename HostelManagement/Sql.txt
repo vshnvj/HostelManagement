@@ -73,3 +73,14 @@ CREATE TABLE [dbo].[complaint] (
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
+CREATE TABLE [dbo].[Deallocation] (
+    [Room_no]            INT  NULL,
+    [User_id]            INT  NULL,
+        [Name]            varchar(40) NULL,
+        [Mobile]          varchar(10) NULL,
+    [Rent]            INT  NULL,
+
+    [Date_of_allocation] DATE NULL,
+
+    FOREIGN KEY ([Room_no]) REFERENCES [dbo].[Rooms] ([Room_no])
+);

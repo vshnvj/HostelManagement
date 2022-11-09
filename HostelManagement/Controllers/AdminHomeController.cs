@@ -184,11 +184,12 @@ namespace HostelManagement.Controllers
                 var response = client.GetAsync(uri);
                 response.Wait();
                 var test = response.Result;
-                List<ViewModel> list = new List<ViewModel>();
+                Tuple < List<ViewModel>, List<ViewModel> >list = new Tuple<List<ViewModel>, List<ViewModel>>(new List<ViewModel>(),new List<ViewModel>());
             if (test.IsSuccessStatusCode)
             {
-                var employees = test.Content.ReadAsAsync<List<ViewModel>>();
+                var employees = test.Content.ReadAsAsync<Tuple<List<ViewModel>, List<ViewModel>>>();
                 employees.Wait();
+                  
                 list = employees.Result;
                 //return View(list);
 
