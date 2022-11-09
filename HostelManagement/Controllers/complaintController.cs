@@ -100,40 +100,17 @@ namespace HostelManagement.Controllers
             return View();
         }
 
-      
+
+
         public async Task<ActionResult> Delete(int? id)
         {
-            
+
             HttpClient client = new HttpClient();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var response = client.GetAsync(uri + id.ToString());
-
-
-
-            var test = response.Result;
-            var res = test.Content.ReadAsAsync<complaint>();
-            res.Wait();
-            complaint complaint1 = res.Result;
-
-
-            if (complaint1 == null)
-            {
-                return HttpNotFound();
-            }
-            return View(complaint1);
-
-        }
-
-        // POST: complaint/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-           
-            HttpClient client = new HttpClient();
+          
 
 
 
@@ -145,7 +122,11 @@ namespace HostelManagement.Controllers
 
             //return RedirectToAction("Index");
             return RedirectToAction("Index", "Complaint");
+
+           
         }
+
+       
 
         protected override void Dispose(bool disposing)
         {
