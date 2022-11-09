@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HostelManagement.Models.ViewModel>
+﻿@model Tuple<List<HostelManagement.Models.ViewModel>, List<HostelManagement.Models.ViewModel>>
 @{
     ViewBag.Title = "TrackRent";
     Layout = "~/Views/Shared/Admin_layout.cshtml";
@@ -6,9 +6,9 @@
 
 <h2>TrackRent</h2>
 
-<form action="" class="form-inline my-2 my-sm-0" >
+<form action="" class="form-inline my-2 my-sm-0">
     Year:
-   
+
     <select name="year" id="" class="form-control mr-sm-2">
         <option value="2022">2022</option>
         <option value="2021">2021</option>
@@ -19,7 +19,7 @@
     </select>
 
     Month:
-    <select name="month" id="" class="form-control mr-sm-2" >
+    <select name="month" id="" class="form-control mr-sm-2">
         <option value="1">January</option>
         <option value="2">February</option>
         <option value="3">March</option>
@@ -40,101 +40,177 @@
 
 </form>
 <br />
+<hr />
 
 <table class="table table-striped table-bordered">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Room_no)
+        <th class="text-center">
+            Room no.
         </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
+        <th class="text-center">
+            @*@Html.DisplayNameFor(model => model.Name)*@
+            Guest Name
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mobile)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Rent)
+        <th class="text-center">
+            @*@Html.DisplayNameFor(model => model.Mobile)*@
+            Mobile
         </th>
 
+        <th class="text-center">
+            Rent
+            @*@Html.DisplayNameFor(model => model.Rent)*@
+        </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.Amount)
+
+        <th class="text-center">
+            Amount
+            @*@Html.DisplayNameFor(model => model.Amount)*@
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date_of_payment)
+        <th class="text-center">
+            Date of payment
+            @*@Html.DisplayNameFor(model => model.Date_of_payment)*@
         </th>
-        <th></th>
+        <th class="text-center"></th>
 
     </tr>
 
     @{
 
-        foreach (var item in Model)
+        foreach (var item in Model.Item1)
         {
             if (item.Amount != null)
             {
-        <tr class="table-success">
-            <td class="table-info">
-                @Html.DisplayFor(modelItem => item.Room_no)
+                <tr class="text-center">
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Room_no)
 
-            </td>
-            <td class="table-info">
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td class="table-info">
-                @Html.DisplayFor(modelItem => item.Mobile)
-            </td>
+                    </td>
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
 
-            <td class="table-info">
-                @Html.DisplayFor(modelItem => item.Rent)
-            </td>
-            <td class="table-info">
-                @Html.DisplayFor(modelItem => item.Amount)
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Rent)
+                    </td>
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Amount)
 
-            </td>
-            <td class="table-info">
-                @Html.DisplayFor(modelItem => item.Date_of_payment)
-            </td>
+                    </td>
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Date_of_payment)
+                    </td>
 
-           
-        </tr>
+
+                </tr>
             }
 
 
             else
             {
-            <tr class="danger">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Room_no)
+                <tr class="text-danger text-center">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Room_no)
 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mobile)
-                </td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rent)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date_of_payment)
-                </td>
-                <td>
-                    @Html.ActionLink("Add Payment", "AddRent", new { id = item.User_id }, new { @class = "btn btn-success btn-sm my-2 my-sm-0" })
+                    </td>
+                    <td>
+                        @item.Date_of_payment
+                    </td>
+                    <td>
+                        @Html.ActionLink("Add Payment", "AddRent", new { id = item.User_id }, new { @class = "btn btn-success btn-sm my-2 my-sm-0" })
 
-                </td>
-           </tr>
-                }
+                    </td>
+                </tr>
             }
         }
 
-        </table>
+
+
+
+
+
+        //deallocated
+        foreach (var item in Model.Item2)
+        {
+            if (item.Amount != null)
+            {
+                <tr class="warning text-center">
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Room_no)
+
+                    </td>
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Rent)
+                    </td>
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Amount)
+
+                    </td>
+                    <td class="table-info">
+                        @Html.DisplayFor(modelItem => item.Date_of_payment)
+                    </td>
+
+
+                </tr>
+            }
+
+
+            else
+            {
+                <tr class="text-danger">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Room_no)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date_of_payment)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Add Payment", "AddRent", new { id = item.User_id }, new { @class = "btn btn-success btn-sm my-2 my-sm-0" })
+
+                    </td>
+                </tr>
+            }
+        }
+    }
+
+</table>
 

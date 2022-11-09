@@ -5,9 +5,12 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -130,7 +133,7 @@ namespace HostelManagement.Controllers
             command.Parameters.AddWithValue("@u4", user.Email);
             command.Parameters.AddWithValue("@u5", user.Address);
             command.Parameters.AddWithValue("@u6", 0);
-            command.Parameters.AddWithValue("@u7", user.Password);
+            command.Parameters.AddWithValue("@u7",  user.Password);
             command.Parameters.AddWithValue("@u8", 0); 
             int r;
            
@@ -145,8 +148,10 @@ namespace HostelManagement.Controllers
 
              }
 
-        // DELETE: api/Users/5
-        [ResponseType(typeof(User))]
+
+
+    // DELETE: api/Users/5
+    [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> DeleteUser(int id)
         {
             User user = await db.Users.FindAsync(id);
@@ -177,5 +182,8 @@ namespace HostelManagement.Controllers
 
 
 
-    }
+
+
+
+}
 }

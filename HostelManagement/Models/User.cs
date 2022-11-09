@@ -11,11 +11,7 @@ namespace HostelManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web.Mvc;
-
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,41 +20,21 @@ namespace HostelManagement.Models
             this.Allocations = new HashSet<Allocation>();
             this.Payments = new HashSet<Payment>();
         }
-       
-        
+    
         public int Id { get; set; }
-
-
-        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
-        
-        [Required]
-
         public string Gender { get; set; }
-        
-        [Required]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid mobile number.")]
         public string Mobile { get; set; }
-
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress]
-        [Remote("IsEmailExist", "Users", ErrorMessage = "Email already exists", HttpMethod = "POST")]
         public string Email { get; set; }
-        [Required]
         public string Address { get; set; }
         public Nullable<int> Status { get; set; }
-        
-        [Required(ErrorMessage = "Password is required")]
-        //[RegularExpression("",ErrorMessage ="")]
         public string Password { get; set; }
-
         public Nullable<int> Role_id { get; set; }
-
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Allocation> Allocations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
-       public virtual Role Role { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

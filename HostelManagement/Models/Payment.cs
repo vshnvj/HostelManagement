@@ -12,22 +12,13 @@ namespace HostelManagement.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web.Mvc;
 
     public partial class Payment
     {
-
-     
         public int Id { get; set; }
         public Nullable<int> User_id { get; set; }
-        
-        [Required]
-        //[Remote("CheckAmount", "Payments", ErrorMessage = "Amount is not correct", HttpMethod = "POST")]
-         public Nullable<int> Amount { get; set; }
-        
-        [Required]
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy }", ApplyFormatInEditMode = true)]
+        public Nullable<int> Amount { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy }")]
         public Nullable<System.DateTime> Date_of_payment { get; set; }
     
         public virtual User User { get; set; }

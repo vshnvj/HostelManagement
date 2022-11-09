@@ -124,6 +124,7 @@ namespace HostelManagement.Controllers
 
             //return Content("<script>alert('Request sent successfully')</script>");
             return View(user1);
+            
         }
 
         public ActionResult SeeRequests()
@@ -141,7 +142,7 @@ namespace HostelManagement.Controllers
                 if (u.Status == 2)
                    ViewData["Status"]="Approved";
                 if (u.Status == 3)
-                    ViewData["Status"] = "Rejected";
+                    ViewData["Status"] = "Deallocated";
                 else
                 if (u.Status == 1)
                     ViewData["Status"] = "Applied";

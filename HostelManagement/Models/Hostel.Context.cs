@@ -18,8 +18,6 @@ namespace HostelManagement.Models
         public HostelDatabaseEntities2()
             : base("name=HostelDatabaseEntities2")
         {
-            Configuration.ProxyCreationEnabled = false;
-         
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -32,7 +30,5 @@ namespace HostelManagement.Models
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<User> Users { get; set; }
-
-        public System.Data.Entity.DbSet<HostelManagement.Models.complaint> complaints { get; set; }
     }
 }

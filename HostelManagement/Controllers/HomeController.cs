@@ -26,7 +26,8 @@ namespace HostelManagement.Controllers
                     return RedirectToAction("Index", "UsersHome", new { id = Session["username"].ToString() });
                 }
             }
-            else {
+            else
+            {
                 ViewBag.Title = "Home Page";
 
                 return View();
@@ -34,12 +35,12 @@ namespace HostelManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string email,string password)
+        public ActionResult Login(string email, string password)
         {
             string Email = email;
             string Password = password;
             HttpClient client = new HttpClient();
-            var response=client.GetAsync("http://localhost:64533/GetUserByEmail?email=" + email);
+            var response = client.GetAsync("http://localhost:64533/GetUserByEmail?email=" + email);
             response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
@@ -66,7 +67,7 @@ namespace HostelManagement.Controllers
                 else
                 {
                     TempData["failed"] = "Invalid username or password.";
-            } 
+                }
             }
 
             return View();
