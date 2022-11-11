@@ -1,4 +1,4 @@
-﻿--  Database= HostelDatabase
+﻿--  Database= HostelDatabase------check
 
 CREATE TABLE [dbo].[Users] (
     [Id]       INT identity(1,1)    NOT NULL ,
