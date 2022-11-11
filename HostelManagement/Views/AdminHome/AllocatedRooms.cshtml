@@ -7,22 +7,24 @@
 
 <h2>AllocatedRooms</h2>
 <hr />
-<table class="table table-striped table-bordered">
-    <tr>
+<table class="table table-striped table-bordered text-center">
+    <tr >
 
-        <th>
-            @Html.DisplayNameFor(model => model.Room_no)
+        <th class="text-center">
+            Room no.
+            @*@Html.DisplayNameFor(model => model.Room_no)*@
         </th>
-        <th>
+        <th class="text-center">
             @Html.DisplayNameFor(model => model.User.Name)
         </th>
-        <th>
+        <th class="text-center">
             @Html.DisplayNameFor(model => model.User.Email)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date_of_allocation)
+        <th class="text-center">
+            Date of allocation
+            @*@Html.DisplayNameFor(model => model.Date_of_allocation)*@
         </th>
-        <th>
+        <th class="text-center">
             @Html.DisplayNameFor(model => model.Room.Rent)
         </th>
         

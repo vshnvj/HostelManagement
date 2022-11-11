@@ -122,7 +122,30 @@ namespace HostelManagement.Controllers
             }
             HttpClient client = new HttpClient();
             string uri = "http://localhost:64533/api/AllocationsApi/";
-            var response = client.DeleteAsync(uri+id.ToString());
+            var response = client.GetAsync(uri+id.ToString());
+            response.Wait();
+            var test = response.Result;
+            if (test.IsSuccessStatusCode)
+            {
+                //return RedirectToAction("Index");
+                var a = test.Content.ReadAsAsync<Allocation>();
+                var t = a.Result;
+                 return View(t);
+
+
+            }
+
+            return View();
+        }
+
+        //POST: Allocations/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            HttpClient client = new HttpClient();
+            string uri = "http://localhost:64533/api/AllocationsApi/";
+            var response = client.DeleteAsync(uri + id.ToString());
             response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
@@ -134,17 +157,6 @@ namespace HostelManagement.Controllers
 
             return View();
         }
-
-        // POST: Allocations/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmed(int id)
-        //{
-        //    Allocation allocation = await db.Allocations.FindAsync(id);
-        //    db.Allocations.Remove(allocation);
-        //    await db.SaveChangesAsync();
-        //    return RedirectToAction("Index");
-        //}
 
         protected override void Dispose(bool disposing)
         {

@@ -3,20 +3,14 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/User_Layout.cshtml";
 }
+@{
+    if (ViewBag.Room != null)
+    {
+        <h4>Your Room Details</h4>
 
 
+        <div class="text-info">Room no.: @ViewBag.Room.Room_no</div>
+        <div class="text-info">Monthly Rent: @ViewBag.Room.Rent</div>
 
-    @*<h2>Welcome , @Model.Name  </h2>
-
-
-        @Html.ActionLink("Profile", "Edit", new { id = Model.Id }) |
-
-
-        @Html.ActionLink("Submit your application", "Requests", new { id = Model.Id }) |
-
-        @Html.ActionLink("Status of appliation", "SeeRequests", new { id = Model.Id }) |
-
-        @Html.ActionLink("complaint/feedback", "Feedback")
-
-
-        @ViewData["success"]*@
+    }
+}

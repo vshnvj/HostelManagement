@@ -2,51 +2,72 @@
 <meta name="viewport" content="width=device-width" />
 <title>@ViewBag.Title</title>
 
-<div class="p-5 text-center bg-light">
-    <h1 class="mb-3">Hostel Management system</h1>
-
-
-</div>
 @{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @*<h2>Login failed</h2>*@
 <body>
-<div class="log-form">
-    <form action="" method="post">
-
-        @{ 
-            if(TempData.ContainsKey("failed"))
-            {
-                <div class="danger alert-danger" >
-                    @TempData["failed"]
-                </div>
+    <div class="log-form">
+        <form action="" method="post">
+            <h2 style="text-align:center;margin-top:15px;font-style:italic">Login</h2>
+            @{
+                if (TempData.ContainsKey("failed"))
+                {
+                    <div class="danger alert-danger text-center" >
+                        @TempData["failed"]
+                    </div>
+                }
             }
-        }
-        Email:
+            <label>Email:</label>
 
-        <input type="email" name="email" class="form-control" required />
+            <input type="email" name="email" class="form-control" required />
 
-        Password:
+            <label>Password:</label>
 
-        <input type="password" name="password" class="form-control" required />
+            <input type="password" name="password" class="form-control" required />
 
-        <input type="submit" value="Login" class="btn btn-primary" />
+            <div class="buttons">
+                <input type="submit" value="Login" class="btn btn-primary" style="margin-left:37%;" />
+                <br />
+                <br />
 
-    </form>
-    <br />
-    <div>
-        @Html.ActionLink("Register", "Create", "Users", new { }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Register", "Create", "Users", new { }, new { @class = "btn btn-info", @style = "margin-left:35%;" })
+            </div>
+        </form>
+        <br />
     </div>
-</div>
-    </body>
+</body>
 <style>
-    body{
-        background-color:aqua;
+    .buttons {
+        padding-top: 5px;
+        padding-left: 10px;
+        align-self: center;
     }
-    .log-form{
-        width:200px;
-        height:200px;
+
+    body {
+        background-color: ;
     }
+
+    .log-form {
+        color: black;
+        opacity: 0.9;
+        border-radius: 15px;
+        width: 200px;
+        height: 320px;
+    }
+
+        .log-form input[type=email] {
+            margin-left: 15px;
+        }
+
+        .log-form input[type=password] {
+            margin-left: 15px;
+            margin-bottom: 10px;
+        }
+
+        .log-form label {
+            margin-left: 15px;
+        }
 </style>
