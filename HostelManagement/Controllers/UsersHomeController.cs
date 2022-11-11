@@ -15,6 +15,8 @@ namespace HostelManagement.Controllers
         HttpClient client = new HttpClient();
         public ActionResult Index()
         {
+           
+
             var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
             User li = new User();
             response.Wait();
@@ -23,12 +25,15 @@ namespace HostelManagement.Controllers
             {
                 var r = test.Content.ReadAsAsync<User>();
                 //r.Wait();
-                user= r.Result;
+                user = r.Result;
+                if(GetRoom()!=null)
+                {
+                    ViewBag.Room = GetRoom();
+                }
             }
             return View(user);
-           
-        }
 
+        }
         public ActionResult Edit()
         {
             return RedirectToAction("Edit", "Users", new { id = Session["username"] } );
@@ -140,13 +145,19 @@ namespace HostelManagement.Controllers
                 var re = test.Content.ReadAsAsync<User>();
                 u = re.Result;
                 if (u.Status == 2)
-                   ViewData["Status"]="Approved";
+                {
+                    ViewData["Status"] = "Approved" ;
+                }
                 if (u.Status == 3)
+                {
                     ViewData["Status"] = "Deallocated";
-                else
-                if (u.Status == 1)
+                }
+
+              
+            if (u.Status == 1)
+                {
                     ViewData["Status"] = "Applied";
-                
+                }
             }
             return  View(u);
         }
@@ -155,6 +166,23 @@ namespace HostelManagement.Controllers
         {
             Session.Abandon();
             return RedirectToAction("Login", "Home");
+        }
+        public Room GetRoom()
+        {
+            HttpClient client = new HttpClient();
+
+            var response = client.GetAsync("http://localhost:64533/api/allocationsapi/" + Session["username"].ToString());
+            response.Wait();
+            var test = response.Result;
+            Allocation all = new Allocation();
+            User u = new User();
+            if (test.IsSuccessStatusCode)
+            {
+                var re = test.Content.ReadAsAsync<Allocation>();
+                return re.Result.Room;
+            }
+
+            return null;
         }
 
     }

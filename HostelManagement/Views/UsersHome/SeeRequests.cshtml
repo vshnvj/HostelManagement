@@ -11,25 +11,15 @@
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
         @*<input type="submit" value="Save" class="btn btn-primary" />*@
-        @{
-
-            if (Model.Status == 0 || Model.Status == 3)
-            {
-                @Html.ActionLink("Submit  ", "Requests", new { id = Model.Id }, new { @class = "btn btn-success" })
-            }
-            else
-            {
-                @Html.ActionLink("Submit  ", "Requests", new { id = Model.Id }, new { @class = "btn btn-success disabled" })
-
-            }
-        }
+        
     </div>
 </div>
 
 
 @{
     if (ViewData["Status"] != null)
-    {<h5>status: </h5>@ViewData["Status"];
+    {
+        <h4>status: </h4>@ViewData["Status"];
 }
 }
 

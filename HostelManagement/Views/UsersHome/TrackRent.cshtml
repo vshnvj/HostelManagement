@@ -9,6 +9,17 @@
 
 <h2>TrackRent</h2>
 
+@{
+    if (ViewBag.Room != null)
+    {
+        <h4>Your Room Details</h4>
+
+
+        <div class="text-info">Room no.: @ViewBag.Room.Room_no</div>
+        <div class="text-info">Monthly Rent: @ViewBag.Room.Rent</div>
+
+    }
+}
 
 <table class="table table-striped table-bordered">
     <tr>
