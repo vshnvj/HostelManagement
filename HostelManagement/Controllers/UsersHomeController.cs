@@ -147,6 +147,40 @@ namespace HostelManagement.Controllers
                     ViewData["Status"] = "Applied";
                 
             }
+
+
+
+            HttpClient client1 = new HttpClient();
+
+
+            string uri1 = "http://localhost:64533/api/AllocationsApi/"+ u.Id;
+            var response1 = client.GetAsync(uri1);
+            response.Wait();
+            var test1 = response1.Result;
+
+            
+
+            if (test.IsSuccessStatusCode)
+            {
+                 
+                var employees1 = test1.Content.ReadAsAsync<Allocation>();
+                employees1.Wait();
+               if(employees1.Result != null)
+                {
+                    Allocation al = (Allocation)employees1.Result;
+                    if (al != null)
+                        ViewData["room"] = al.Room_no;
+                }
+              
+
+              
+               
+
+            }
+
+
+
+
             return  View(u);
         }
 

@@ -29,7 +29,14 @@
 
 @{
     if (ViewData["Status"] != null)
-    {<h5>status: </h5>@ViewData["Status"];
+    {
+    <h4>status: @ViewData["Status"]</h4>
+
+        if (ViewData["Status"] != null)
+                {
+                        <h4>Room no: @ViewData["room"]</h4>
+                }
+        
 }
 }
 
