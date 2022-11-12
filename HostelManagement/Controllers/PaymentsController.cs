@@ -18,6 +18,8 @@ namespace HostelManagement.Controllers
         private HostelDatabaseEntities2 db = new HostelDatabaseEntities2();
         HttpClient client = new HttpClient();
         // GET: Payments
+        DateTime doa;
+        int Rent;
         
           
         public async Task<ActionResult> Index()
@@ -55,6 +57,24 @@ namespace HostelManagement.Controllers
         public ActionResult Create(int? id)
         {
             ViewBag.User_id = id;
+            string uri = "http://localhost:64533/api/AllocationsApi/";
+            var response = client.GetAsync(uri + id.ToString());
+            response.Wait();
+            var test = response.Result;
+            if (test.IsSuccessStatusCode)
+            {
+                
+                var a = test.Content.ReadAsAsync<Allocation>();
+                var all = a.Result;
+                doa = (DateTime)all.Date_of_allocation;
+                Rent = (int)all.Room.Rent;
+                TempData["User_id"] = id;
+                TempData["doa"] = doa;
+                TempData["Rent"] = Rent;
+
+
+            }
+
             return View();
         }
 
@@ -63,9 +83,33 @@ namespace HostelManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,User_id,Amount,Date_of_payment")] Payment payment)
         {
+
+            if (TempData.ContainsKey("Rent"))
+                Rent= Convert.ToInt32(TempData.Peek("Rent").ToString());
+
+            if (TempData.ContainsKey("User_id"))
+                payment.User_id = Convert.ToInt32(TempData.Peek("User_id").ToString());
+
+
+            if (TempData.ContainsKey("doa"))
+                doa= DateTime.Parse(TempData.Peek("doa").ToString());
+
+
+            if (payment.Amount > Rent)
+            {
+                ModelState.AddModelError("rent", "Amount is more than the rent");
+                return View();
+            }
+            if (payment.Date_of_payment < doa)
+            {
+                ModelState.AddModelError("Doa", "Guest was not allocated in this month");
+                return View();
+            }
+
             var response = client.PostAsJsonAsync<Payment>("http://localhost:64533/api/paymentsapi/", payment);
             response.Wait();
             var test = response.Result;
+            
             if (test.IsSuccessStatusCode)
             {
                

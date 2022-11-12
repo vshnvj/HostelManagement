@@ -181,23 +181,8 @@
     <Compile Include="Models\Allocation.cs">
       <DependentUpon>Hostel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Complaint.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Complaint.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\complaint.cs">
-      <DependentUpon>Complaint.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Complaint.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Complaint.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Complaint1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Complaint.tt</DependentUpon>
+      <DependentUpon>Hostel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hostel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -239,16 +224,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Complaint.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Complaint.edmx</DependentUpon>
-      <LastGenOutput>Complaint.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Complaint.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Complaint.edmx</DependentUpon>
-      <LastGenOutput>Complaint1.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\Hostel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Hostel.edmx</DependentUpon>
@@ -286,13 +261,6 @@
     </EntityDeploy>
     <Content Include="Models\Hostel.edmx.diagram">
       <DependentUpon>Hostel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\Complaint.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Complaint.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Complaint.edmx.diagram">
-      <DependentUpon>Complaint.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\css\StyleSheet1.css" />
@@ -348,10 +316,7 @@
     <Content Include="Views\AdminHome\TrackRent.cshtml" />
     <Content Include="Views\complaint\Create.cshtml" />
     <Content Include="Views\complaint\Delete.cshtml" />
-    <Content Include="Views\complaint\Details.cshtml" />
-    <Content Include="Views\complaint\Edit.cshtml" />
     <Content Include="Views\complaint\Index.cshtml" />
-    <Content Include="Views\complaint\complaintRegistered.cshtml" />
     <Content Include="Views\UsersHome\TrackRent.cshtml" />
     <Content Include="Views\UsersHome\Feedback.cshtml" />
   </ItemGroup>

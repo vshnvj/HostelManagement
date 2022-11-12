@@ -18,13 +18,13 @@ namespace HostelManagement.Controllers
         string allocationUri = "api/AllocationsApi/";
         public ActionResult Index()
         {
-            if (Session["username"] == null)
+            if (Session["id"] == null)
             {
                 return RedirectToAction("Login", "Home");
             }
             else
             {
-                if (Session["username"].ToString() != "1")
+                if (Session["id"].ToString() != "1")
                 {
 
                     return RedirectToAction("Index", "AdminHome");
@@ -61,7 +61,7 @@ namespace HostelManagement.Controllers
 
         public ActionResult Users(string search=null)
         {
-            if (Session["username"] == null)
+            if (Session["id"] == null)
             {
                 return RedirectToAction("Login", "Home");
             }
@@ -100,7 +100,7 @@ namespace HostelManagement.Controllers
         
         public ActionResult AllocatedRooms()
         {
-            if (Session["username"] == null)
+            if (Session["id"] == null)
             {
                 return RedirectToAction("Login", "Home");
             }
@@ -128,7 +128,7 @@ namespace HostelManagement.Controllers
 
         public ActionResult Rooms()
         {
-            if (Session["username"] == null)
+            if (Session["id"] == null)
             {
                 return RedirectToAction("Login", "Home");
             }
@@ -166,7 +166,7 @@ namespace HostelManagement.Controllers
        
         public ActionResult TrackRent(string month=null,string year=null)
         {
-            if (Session["username"] == null)
+            if (Session["id"] == null)
             {
                 return RedirectToAction("Login", "Home");
             }

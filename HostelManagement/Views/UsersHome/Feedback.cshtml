@@ -4,7 +4,7 @@
 }
 
 
-<h2>Feedback</h2>
+<h2>Complaints/Feedback</h2>
 
 
 @using (Html.BeginForm())
@@ -18,7 +18,7 @@
 
                 Subject :
                 <div class="input-group mb-3">
-                    <input type="text" name="sub" class="form-control" />
+                    <input type="text" name="sub" class="form-control" required/>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                 Details :
                 <div class="input-group">
 
-                    <input type="text" name="details" class="form-control" />
+                    <input type="text" name="details" class="form-control" required/>
                 </div>
                 <input type="hidden" name="id" />
             </div>

@@ -1,4 +1,4 @@
-﻿@model HostelManagement.Models.User
+﻿@*@model HostelManagement.Models.User*@
     <!DOCTYPE html>
     <html>
     <head>
@@ -27,47 +27,23 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "UsersHome", new { }, new { id = Model.Id })</li>
+                    <li>@Html.ActionLink("Home", "Index", "UsersHome", new { }, new { id =Session["id"]})</li>
 
-                    <li>@Html.ActionLink("Profile", "Edit", "UsersHome", new { }, new { id = Model.Id })</li>
-                    <li> @Html.ActionLink("Status of appliation", "SeeRequests", "UsersHome", new { }, new { id = Model.Id }) </li>
-                    <li>   @Html.ActionLink("Feedback", "Feedback", "UsersHome", new { }, new { id = Model.Id })</li>
+                    <li>@Html.ActionLink("Profile", "Edit", "UsersHome", new { }, new { id =Session["id"]})</li>
+                    <li> @Html.ActionLink("Status of appliation", "SeeRequests", "UsersHome", new { }, new { id =Session["id"]}) </li>
+                    <li>@Html.ActionLink("Feedback", "Feedback", "UsersHome", new { }, new { id =Session["id"]})</li>
 
-                    <li>   @Html.ActionLink("Track rent", "TrackRent", "UsersHome", new { }, new { id = Model.Id })</li>
-                    <li>  @Html.ActionLink("Logout", "Logout", "UsersHome")</li>
+                    <li>@Html.ActionLink("Track rent", "TrackRent", "UsersHome", new { }, new { id =Session["id"]})</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "UsersHome")</li>
 
                 </ul>
-                <h5 style="padding-top:15px;right;color:white">Welcome, @Model.Name</h5>
+                <h5 style="padding-top:15px;right;color:white">Welcome, @Session["Name"]</h5>
 
 
             </div>
         </nav>
 
-        <!--<nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">-->
-
-                    @* <div class="navbar fixed-top  navbar-light" style="background-color: #e3f2fd">*@
-                    <!--<ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Profile", "Edit", "UsersHome", new { }, new { id = Model.Id })</li>
-                        <li> @Html.ActionLink("Status of appliation", "SeeRequests", "UsersHome", new { }, new { id = Model.Id }) </li>
-                        <li>   @Html.ActionLink("Feedback", "Feedback", "UsersHome", new { }, new { id = Model.Id })</li>
-
-                        <li>   @Html.ActionLink("Track rent", "TrackRent", "UsersHome", new { }, new { id = Model.Id })</li>-->
-
-                        @*<li>@Html.ActionLink("Logout", "Logout", "UsersHome", new {@class="glyphicon glyphicon-log-in",@text-align:"right"})</li>*@
-
-                    <!--</ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    </ul>
-
-
-
-                </div>
-            </div>
-        </nav>-->
+       
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
 
@@ -114,52 +90,6 @@
 
     </html>
 
-
-<!--<html lang="en">
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">WebSiteName</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Page 1-1</a></li>
-                        <li><a href="#">Page 1-2</a></li>
-                        <li><a href="#">Page 1-3</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Page 2</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-        </div>
-    </nav>-->
-
-
-    <!-- Background image -->
-    <!--<div class="bg-image"
-         style="
-    background-image: url('https://wallpapercave.com/wp/wp2599594.jpg');
-    height: 100vh;
-  "></div>-->
-    <!-- Background image -->
-
-<!--</body>
-</html>-->
 
 
 

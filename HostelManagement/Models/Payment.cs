@@ -17,8 +17,13 @@ namespace HostelManagement.Models
     {
         public int Id { get; set; }
         public Nullable<int> User_id { get; set; }
+
+        [Required]
         public Nullable<int> Amount { get; set; }
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy }")]
+
+        [Required]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy }", ApplyFormatInEditMode = true)]
+
         public Nullable<System.DateTime> Date_of_payment { get; set; }
     
         public virtual User User { get; set; }

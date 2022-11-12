@@ -36,9 +36,9 @@ namespace HostelManagement.Controllers
             return Ok(room);
         }
 
-        [Route("GetRoomGuets")]
+        [Route("GetRoomGuests")]
         [ResponseType(typeof(Room))]
-        public async Task<IHttpActionResult> GetRoomGuets(int id)
+        public async Task<IHttpActionResult> GetRoomGuests(int id)
         {
             List<User> li = new List<User>();
             Room room = await db.Rooms.FindAsync(id);
@@ -48,12 +48,12 @@ namespace HostelManagement.Controllers
             }
             else
             {
-                var all=db.Allocations.Include(x =>x.User).ToList().FindAll(x=>x.Room_no==room.Room_no);
-               
+                var all = db.Allocations.Include(x => x.User).ToList().FindAll(x => x.Room_no == room.Room_no);
+
                 return Ok(all.ToList());
             }
 
-            
+
         }
 
         // PUT: api/RoomsApi/5

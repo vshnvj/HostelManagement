@@ -12,10 +12,10 @@ namespace HostelManagement.Controllers
     {
         public ActionResult Login()
         {
-            if (Session["username"] != null)
+            if (Session["id"] != null)
             {
 
-                if (Session["username"].ToString() == "1")
+                if (Session["id"].ToString() == "1")
                 {
 
                     return RedirectToAction("Index", "AdminHome");
@@ -23,13 +23,12 @@ namespace HostelManagement.Controllers
 
                 else
                 {
-                    return RedirectToAction("Index", "UsersHome", new { id = Session["username"].ToString() });
+                    return RedirectToAction("Index", "UsersHome", new { id = Session["id"].ToString() });
                 }
             }
             else
             {
-                ViewBag.Title = "Home Page";
-
+              
                 return View();
             }
         }
@@ -52,14 +51,15 @@ namespace HostelManagement.Controllers
                 {
                     if (u.Role_id == 1)
                     {
-                        Session["username"] = u.Id;
+                       Session["id"]= u.Id;
                         return RedirectToAction("Index", "AdminHome");
                     }
 
                     else
                     {
-                        Session["username"] = u.Id;
-                        return RedirectToAction("Index", "UsersHome", new { id = Session["username"].ToString() });
+                       Session["id"]= u.Id;
+                        Session["Name"] = u.Name;
+                        return RedirectToAction("Index", "UsersHome", new { id = Session["id"].ToString() });
                     }
 
                 }
@@ -68,6 +68,10 @@ namespace HostelManagement.Controllers
                 {
                     TempData["failed"] = "Invalid username or password.";
                 }
+            }
+            else
+            {
+                TempData["failed"] = "Invalid username or password.";
             }
 
             return View();

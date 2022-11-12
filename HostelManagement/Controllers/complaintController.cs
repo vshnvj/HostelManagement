@@ -14,7 +14,7 @@ namespace HostelManagement.Controllers
 {
     public class complaintController : Controller
     {
-        private HostelDatabaseEntities6 db = new HostelDatabaseEntities6();
+        private HostelDatabaseEntities2 db = new HostelDatabaseEntities2();
 
         // GET: complaint
         string uri = "http://localhost:64533/api/complaintapi/";
@@ -60,7 +60,7 @@ namespace HostelManagement.Controllers
         {
             HttpClient client = new HttpClient();
 
-            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
+            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["id"].ToString());
 
             User user = new User();
             response.Wait();
@@ -111,22 +111,15 @@ namespace HostelManagement.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
           
-
-
-
-            var response = client.DeleteAsync(uri + id);
-
-
-
-            response.Wait();
-
-            //return RedirectToAction("Index");
-            return RedirectToAction("Index", "Complaint");
-
-           
+       var response = client.DeleteAsync(uri + id);
+        response.Wait();
+            var test = response.Result;
+            if (test.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Complaint");
+            }
+            return View();
         }
-
-       
 
         protected override void Dispose(bool disposing)
         {

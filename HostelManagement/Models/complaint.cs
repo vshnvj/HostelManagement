@@ -11,11 +11,20 @@ namespace HostelManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class complaint
     {
         public int Id { get; set; }
+
+        [Required]
         public string sub { get; set; }
+        public Nullable<int> user { get; set; }
+        public Nullable<int> Seen { get; set; }
+        [Required]
+
         public string details { get; set; }
+    
+        public  User User1 { get; set; }
     }
 }

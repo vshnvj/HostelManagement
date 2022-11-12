@@ -4,20 +4,115 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HostelDatabaseModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HostelDatabaseModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Allocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Room_no" Type="int" />
+          <Property Name="User_id" Type="int" />
+          <Property Name="Date_of_allocation" Type="date" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="complaint">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="sub" Type="varchar" MaxLength="100" />
+          <Property Name="user" Type="int" />
           <Property Name="details" Type="varchar" MaxLength="250" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'HostelDatabase.dbo.Deallocation' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Deallocation">
+          <Property Name="Room_no" Type="int" />
+          <Property Name="User_id" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="40" />
+          <Property Name="Mobile" Type="varchar" MaxLength="10" />
+          <Property Name="Rent" Type="int" />
+          <Property Name="Date_of_allocation" Type="date" />
+        </EntityType>-->
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="int" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Date_of_payment" Type="date" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Role_id" />
+          </Key>
+          <Property Name="Role_id" Type="int" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="Room_no" />
+          </Key>
+          <Property Name="Room_no" Type="int" Nullable="false" />
+          <Property Name="Capacity" Type="int" />
+          <Property Name="available" Type="int" />
+          <Property Name="Rent" Type="float" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+          <Property Name="Mobile" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="Role_id" Type="int" />
+        </EntityType>
+        <Association Name="FK__Allocatio__Room___628FA481">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="0..1" />
+          <End Role="Allocation" Type="Self.Allocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="Room_no" />
+            </Principal>
+            <Dependent Role="Allocation">
+              <PropertyRef Name="Room_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__complaint__user__395884C4">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="complaint" Type="Self.complaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="complaint">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HostelDatabaseModel1StoreContainer">
+          <EntitySet Name="Allocation" EntityType="Self.Allocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="complaint" EntityType="Self.complaint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Allocatio__Room___628FA481" Association="Self.FK__Allocatio__Room___628FA481">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Allocation" EntitySet="Allocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__complaint__user__395884C4" Association="Self.FK__complaint__user__395884C4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="complaint" EntitySet="complaint" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HostelDatabaseModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -28,10 +123,100 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="sub" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="details" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="user" Type="Int32" />
+          <NavigationProperty Name="User1" Relationship="HostelDatabaseModel1.FK__complaint__user__395884C4" FromRole="complaint" ToRole="User" />
         </EntityType>
         <EntityContainer Name="HostelDatabaseEntities6" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="complaints" EntityType="Self.complaint" />
+          <EntitySet Name="Allocations" EntityType="HostelDatabaseModel1.Allocation" />
+          <EntitySet Name="Payments" EntityType="HostelDatabaseModel1.Payment" />
+          <EntitySet Name="Roles" EntityType="HostelDatabaseModel1.Role" />
+          <EntitySet Name="Rooms" EntityType="HostelDatabaseModel1.Room" />
+          <EntitySet Name="Users" EntityType="HostelDatabaseModel1.User" />
+          <AssociationSet Name="FK__Allocatio__Room___628FA481" Association="HostelDatabaseModel1.FK__Allocatio__Room___628FA481">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Allocation" EntitySet="Allocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__complaint__user__395884C4" Association="HostelDatabaseModel1.FK__complaint__user__395884C4">
+            <End Role="User" EntitySet="Users" />
+            <End Role="complaint" EntitySet="complaints" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Allocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Room_no" Type="Int32" />
+          <Property Name="User_id" Type="Int32" />
+          <Property Name="Date_of_allocation" Type="DateTime" Precision="0" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Room" Relationship="HostelDatabaseModel1.FK__Allocatio__Room___628FA481" FromRole="Allocation" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Date_of_payment" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Role_id" />
+          </Key>
+          <Property Name="Role_id" Type="Int32" Nullable="false" />
+          <Property Name="Role1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Room_no" />
+          </Key>
+          <Property Name="Room_no" Type="Int32" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" />
+          <Property Name="available" Type="Int32" />
+          <Property Name="Rent" Type="Double" />
+          <NavigationProperty Name="Allocations" Relationship="HostelDatabaseModel1.FK__Allocatio__Room___628FA481" FromRole="Room" ToRole="Allocation" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Role_id" Type="Int32" />
+          <NavigationProperty Name="complaints" Relationship="HostelDatabaseModel1.FK__complaint__user__395884C4" FromRole="User" ToRole="complaint" />
+        </EntityType>
+        <Association Name="FK__Allocatio__Room___628FA481">
+          <End Type="HostelDatabaseModel1.Room" Role="Room" Multiplicity="0..1" />
+          <End Type="HostelDatabaseModel1.Allocation" Role="Allocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Room_no" />
+            </Principal>
+            <Dependent Role="Allocation">
+              <PropertyRef Name="Room_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__complaint__user__395884C4">
+          <End Type="HostelDatabaseModel1.User" Role="User" Multiplicity="0..1" />
+          <End Type="HostelDatabaseModel1.complaint" Role="complaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="complaint">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -41,9 +226,63 @@
           <EntitySetMapping Name="complaints">
             <EntityTypeMapping TypeName="HostelDatabaseModel1.complaint">
               <MappingFragment StoreEntitySet="complaint">
+                <ScalarProperty Name="user" ColumnName="user" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="sub" ColumnName="sub" />
                 <ScalarProperty Name="details" ColumnName="details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Allocations">
+            <EntityTypeMapping TypeName="HostelDatabaseModel1.Allocation">
+              <MappingFragment StoreEntitySet="Allocation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date_of_allocation" ColumnName="Date_of_allocation" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Room_no" ColumnName="Room_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="HostelDatabaseModel1.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="Date_of_payment" ColumnName="Date_of_payment" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="HostelDatabaseModel1.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+                <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="HostelDatabaseModel1.Room">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="Rent" ColumnName="Rent" />
+                <ScalarProperty Name="available" ColumnName="available" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Room_no" ColumnName="Room_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HostelDatabaseModel1.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

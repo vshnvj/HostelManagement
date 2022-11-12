@@ -6,6 +6,13 @@
     <edmx:Diagrams>
       <Diagram DiagramId="2dafb66f3674467aa76d4a07809629e2" Name="Diagram1">
         <EntityTypeShape EntityType="HostelDatabaseModel1.complaint" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HostelDatabaseModel1.Allocation" Width="1.5" PointX="6" PointY="0.875" />
+        <EntityTypeShape EntityType="HostelDatabaseModel1.Payment" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HostelDatabaseModel1.Role" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HostelDatabaseModel1.Room" Width="1.5" PointX="3.75" PointY="0.875" />
+        <EntityTypeShape EntityType="HostelDatabaseModel1.User" Width="1.5" PointX="1.125" PointY="6.875" />
+        <AssociationConnector Association="HostelDatabaseModel1.FK__Allocatio__Room___628FA481" />
+        <AssociationConnector Association="HostelDatabaseModel1.FK__complaint__user__395884C4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

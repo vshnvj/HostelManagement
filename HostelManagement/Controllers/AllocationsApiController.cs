@@ -56,7 +56,8 @@ namespace HostelManagement.Controllers
 
            
                                         
-var allrents = from all in db.Allocations.Include(x => x.Room).Include(x => x.User).ToList()
+var allrents = from all in db.Allocations.Include(x => x.Room).Include(x => x.User).ToList().FindAll(x=>
+x.Date_of_allocation.Value.Month <= int.Parse(month))
                            join pay in temp.ToList()
                            on all.User_id equals pay.User_id
                            into data_A

@@ -16,7 +16,7 @@ namespace HostelManagement.Controllers
 {
     public class complaintApiController : ApiController
     {
-        private HostelDatabaseEntities6 db = new HostelDatabaseEntities6();
+        private HostelDatabaseEntities2 db = new HostelDatabaseEntities2();
 
         // GET: api/complaintApi
         public IQueryable<complaint> Getcomplaints()
@@ -24,18 +24,24 @@ namespace HostelManagement.Controllers
             return db.complaints;
         }
 
-        // GET: api/complaintApi/5
-        [ResponseType(typeof(complaint))]
-        public async Task<IHttpActionResult> Getcomplaint(int id)
+        [Route("GetComplaintsList")]
+        public List<complaint> GetComplaintsList(int userid)
         {
-            complaint complaint = await db.complaints.FindAsync(id);
-            if (complaint == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(complaint);
+            return db.complaints.ToList().FindAll(x =>x.user==userid);
         }
+
+        // GET: api/complaintApi/5
+        //[ResponseType(typeof(complaint))]
+        //public async Task<IHttpActionResult> Getcomplaint(int id)
+        //{
+        //    complaint complaint = await db.complaints.FindAsync(id);
+        //    if (complaint == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(complaint);
+        //}
 
         // PUT: api/complaintApi/5
         [ResponseType(typeof(void))]
@@ -76,14 +82,17 @@ namespace HostelManagement.Controllers
         [ResponseType(typeof(complaint))]
         public async Task<IHttpActionResult> Postcomplaint(complaint complaint)
         {
+           
             string con = "data source=(localdb)\\ProjectsV13;initial catalog=HostelDatabase;integrated security=True";
             SqlConnection conn = new SqlConnection(con);
             conn.Open();
-            SqlCommand command = new SqlCommand(@"INSERT INTO [dbo].[complaint] ( [sub], [details]) 
-                                                                     values  (@u1, @u2)", conn);
+            SqlCommand command = new SqlCommand(@"INSERT INTO [dbo].[complaint] ( [sub], [details], [user],[seen]) 
+                                                                     values  (@u1, @u2, @u3,@u4)", conn);
 
             command.Parameters.AddWithValue("@u1", complaint.sub);
             command.Parameters.AddWithValue("@u2",complaint.details);
+            command.Parameters.AddWithValue("@u3", complaint.user);
+            command.Parameters.AddWithValue("@u4",0);
 
             int r;
 
@@ -106,9 +115,16 @@ namespace HostelManagement.Controllers
             {
                 return NotFound();
             }
+            if(complaint.Seen == 0)
+            {
+                complaint.Seen = 1;
+                db.Entry(complaint).State=EntityState.Modified;
+                db.SaveChanges();
+            }
 
-            db.complaints.Remove(complaint);
-            await db.SaveChangesAsync();
+            
+            //db.complaints.Remove(complaint);
+           // await db.SaveChangesAsync();
 
             return Ok(complaint);
         }

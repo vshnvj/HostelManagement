@@ -33,11 +33,11 @@ namespace HostelManagement.Controllers
             return payments;
         }
 
-        // GET: api/PaymentsApi/5
-        [ResponseType(typeof(Payment))]
-        public async Task<IHttpActionResult> GetPayment(int id)
+
+
+        public async Task<IHttpActionResult> GetPayment(int userid)
         {
-            Payment payment = await db.Payments.FindAsync(id);
+            List<Payment> payment = db.Payments.ToList().FindAll(x => x.User_id == userid);
             if (payment == null)
             {
                 return NotFound();
@@ -85,22 +85,27 @@ namespace HostelManagement.Controllers
         [ResponseType(typeof(Payment))]
         public async Task<IHttpActionResult> PostPayment(Payment payment)
         {
-            string con = "data source=(localdb)\\ProjectsV13;initial catalog=HostelDatabase;integrated security=True";
-            SqlConnection conn = new SqlConnection(con);
-            conn.Open();
-            SqlCommand command = new SqlCommand("insert into Payment(User_id,Amount,Date_of_payment) values  (@uid, @amount, @date)", conn);
-
-            command.Parameters.AddWithValue("@uid", payment.User_id);
-            command.Parameters.AddWithValue("@amount", payment.Amount);
-            command.Parameters.AddWithValue("@date", payment.Date_of_payment);
-            int r = command.ExecuteNonQuery();
-            if (r > 0)
+            if (ModelState.IsValid)
             {
-                //return RedirectToAction("TrackRent", "AdminHome");
-                return Ok(r);
+
+
+
+                string con = "data source=(localdb)\\ProjectsV13;initial catalog=HostelDatabase;integrated security=True";
+                SqlConnection conn = new SqlConnection(con);
+                conn.Open();
+                SqlCommand command = new SqlCommand("insert into Payment(User_id,Amount,Date_of_payment) values  (@uid, @amount, @date)", conn);
+
+                command.Parameters.AddWithValue("@uid", payment.User_id);
+                command.Parameters.AddWithValue("@amount", payment.Amount);
+                command.Parameters.AddWithValue("@date", payment.Date_of_payment);
+                int r = command.ExecuteNonQuery();
+                if (r > 0)
+                {
+                    //return RedirectToAction("TrackRent", "AdminHome");
+                    return Ok(r);
+                }
             }
-
-
+           
 
             return BadRequest();
         }

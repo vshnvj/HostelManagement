@@ -1,4 +1,4 @@
-﻿@model HostelManagement.Models.User
+﻿@model List<HostelManagement.Models.complaint>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/User_Layout.cshtml";
@@ -7,10 +7,54 @@
     if (ViewBag.Room != null)
     {
         <h4>Your Room Details</h4>
-
-
-        <div class="text-info">Room no.: @ViewBag.Room.Room_no</div>
-        <div class="text-info">Monthly Rent: @ViewBag.Room.Rent</div>
+        <hr />
+        <div style="font-size:15px" class="text-justify">Room no.: @ViewBag.Room.Room_no</div>
+       <div style="font-size:15px" class="text-justify">Monthly Rent: @ViewBag.Room.Rent</div>
 
     }
 }
+<hr />
+
+<h4>Complaints/Feedback</h4>
+
+
+<table class="table table-striped table-bordered ">
+    <tr>
+        <th>
+            subject
+        </th>
+        <th>
+            details
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+        {
+            if (item.user == int.Parse(Session["id"].ToString()))
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.sub)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.details)
+    </td>
+
+    @if (item.Seen == 1)
+    {
+        <TD><span class="bi bi-eye-fill"> Seen</span></TD>
+    }
+    else
+    {
+
+        <TD><span class="bi bi-eye"> Not Seen</span></TD>
+    }
+   
+
+</tr>
+            }
+        }
+
+</table>

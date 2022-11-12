@@ -15,65 +15,55 @@ namespace HostelManagement.Controllers
         HttpClient client = new HttpClient();
         public ActionResult Index()
         {
-           
-
-            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
-            User li = new User();
-            response.Wait();
-            var test = response.Result;
-            if (test.IsSuccessStatusCode)
-            {
-                var r = test.Content.ReadAsAsync<User>();
-                //r.Wait();
-                user = r.Result;
-                if(GetRoom()!=null)
+                if (GetRoom() != null)
                 {
                     ViewBag.Room = GetRoom();
                 }
-            }
-            return View(user);
+            
+            List<complaint> r_list = new List<complaint>();
+            string uri = "http://localhost:64533/GetComplaintsList?userid=" + Session["id"];
 
-        }
+            var response1 = client.GetAsync(uri);
+            response1.Wait();
+            var test1 = response1.Result;
+            if (test1.IsSuccessStatusCode)
+            {
+                var employees = test1.Content.ReadAsAsync<List<complaint>>();
+               r_list = employees.Result;
+                ViewBag.FeedbackList = r_list;
+            }
+
+
+
+            return View(r_list);
+     }
         public ActionResult Edit()
         {
-            return RedirectToAction("Edit", "Users", new { id = Session["username"] } );
+            return RedirectToAction("Edit", "Users", new { id =Session["id"]});
         }
 
         public ActionResult Feedback()
         {
-            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
-
-            user = new User();
-            response.Wait();
-            var test = response.Result;
-            if (test.IsSuccessStatusCode)
-            {
-                var r = test.Content.ReadAsAsync<User>();
-                //r.Wait();
-                user = r.Result;
-            }
-
-            return View(user);
+             return View();
 
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Feedback( string sub, string details)
+        public ActionResult Feedback(string sub, string details)
         {
             complaint complaint = new complaint();
             complaint.sub = sub;
             complaint.details = details;
+            complaint.user = int.Parse(Session["id"].ToString());
             HttpClient client = new HttpClient();
             var response = client.PostAsJsonAsync<complaint>("http://localhost:64533/api/complaintapi/", complaint);
             response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
-                //return RedirectToAction("Index");
-
-
-                return RedirectToAction("Index", "UsersHome", new { id = Session["username"] });
+                
+                return RedirectToAction("Index", "UsersHome", new { id =Session["id"]});
 
             }
             return View();
@@ -82,61 +72,52 @@ namespace HostelManagement.Controllers
         public ActionResult TrackRent()
         {
 
-        var response = client.GetAsync("http://localhost:64533/api/paymentsapi/");
-        List<Payment> li = new List<Payment>();
-        response.Wait();
+            var response = client.GetAsync("http://localhost:64533/api/paymentsapi");
+            List<Payment> li = new List<Payment>();
+            response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
             {
                 var pays = test.Content.ReadAsAsync<List<Payment>>();
-        pays.Wait();
+                pays.Wait();
                 li = pays.Result;
-                li = li.FindAll(x=>x.User_id == int.Parse(Session["username"].ToString()));
+                li = li.FindAll(x => x.User_id == int.Parse(Session["id"].ToString()));
             }
             ViewBag.List = li;
 
 
-            var response1 = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
-            User l = new User();
-            response.Wait();
-            var test1 = response1.Result;
-            if (test1.IsSuccessStatusCode)
-            {
-                var r = test1.Content.ReadAsAsync<User>();
-                //r.Wait();
-                l = r.Result;
-            }
-            return View(l);
+           
+            return View();
 
-    }
+        }
 
-    public ActionResult Requests()
+        public ActionResult Requests()
         {
-           
-           
-            var response = client.GetAsync("http://localhost:64533/requestsent?id=" + Session["username"].ToString());
+
+
+            var response = client.GetAsync("http://localhost:64533/requestsent?id=" + Session["id"].ToString());
             response.Wait();
-            User user1=new User();
+            User user1 = new User();
             var test = response.Result;
             string s = "";
             if (test.IsSuccessStatusCode)
             {
                 var re = test.Content.ReadAsAsync<User>();
-                 user1 = re.Result;
+                user1 = re.Result;
                 ViewData["success"] = "Request sent successfully";
-                  s= "Request sent successfully";
+                s = "Request sent successfully";
             }
 
             //return Content("<script>alert('Request sent successfully')</script>");
             return View(user1);
-            
+
         }
 
         public ActionResult SeeRequests()
         {
             HttpClient client = new HttpClient();
 
-            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["username"].ToString());
+            var response = client.GetAsync("http://localhost:64533/api/usersapi/" + Session["id"].ToString());
             response.Wait();
             var test = response.Result;
             User u = new User();
@@ -146,15 +127,15 @@ namespace HostelManagement.Controllers
                 u = re.Result;
                 if (u.Status == 2)
                 {
-                    ViewData["Status"] = "Approved" ;
+                    ViewData["Status"] = "Approved";
                 }
                 if (u.Status == 3)
                 {
                     ViewData["Status"] = "Deallocated";
                 }
 
-              
-            if (u.Status == 1)
+
+                if (u.Status == 1)
                 {
                     ViewData["Status"] = "Applied";
                 }
@@ -165,35 +146,35 @@ namespace HostelManagement.Controllers
             HttpClient client1 = new HttpClient();
 
 
-            string uri1 = "http://localhost:64533/api/AllocationsApi/"+ u.Id;
+            string uri1 = "http://localhost:64533/api/AllocationsApi/" + u.Id;
             var response1 = client.GetAsync(uri1);
             response.Wait();
             var test1 = response1.Result;
 
-            
+
 
             if (test.IsSuccessStatusCode)
             {
-                 
+
                 var employees1 = test1.Content.ReadAsAsync<Allocation>();
                 employees1.Wait();
-               if(employees1.Result != null)
+                if (employees1.Result != null)
                 {
                     Allocation al = (Allocation)employees1.Result;
                     if (al != null)
                         ViewData["room"] = al.Room_no;
                 }
-              
 
-              
-               
+
+
+
 
             }
 
 
 
 
-            return  View(u);
+            return View(u);
         }
 
         public ActionResult Logout()
@@ -205,7 +186,7 @@ namespace HostelManagement.Controllers
         {
             HttpClient client = new HttpClient();
 
-            var response = client.GetAsync("http://localhost:64533/api/allocationsapi/" + Session["username"].ToString());
+            var response = client.GetAsync("http://localhost:64533/api/allocationsapi/" + Session["id"].ToString());
             response.Wait();
             var test = response.Result;
             Allocation all = new Allocation();

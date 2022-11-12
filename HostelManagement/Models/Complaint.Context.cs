@@ -26,5 +26,10 @@ namespace HostelManagement.Models
         }
     
         public virtual DbSet<complaint> complaints { get; set; }
+        public virtual DbSet<Allocation> Allocations { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

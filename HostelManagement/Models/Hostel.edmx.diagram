@@ -14,6 +14,8 @@
         <AssociationConnector Association="HostelDatabaseModel.FK__Allocatio__User___6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="HostelDatabaseModel.FK__Payment__User_id__66603565" ManuallyRouted="false" />
         <AssociationConnector Association="HostelDatabaseModel.FK__Users__Role_id__60A75C0F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HostelDatabaseModel.complaint" Width="1.5" PointX="4.5" PointY="9.5" />
+        <AssociationConnector Association="HostelDatabaseModel.FK__complaint__user__3C34F16F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

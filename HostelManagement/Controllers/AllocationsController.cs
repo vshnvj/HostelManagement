@@ -43,7 +43,7 @@ namespace HostelManagement.Controllers
         {
             List<Room> li = new List<Room>();
             li = db.Rooms.ToList().FindAll(r => r.available > 0);
-            if (li == null)
+            if (li.Count==0)
             {
                 ViewData["notavailable"] = "rooms not available";
                 return RedirectToAction("Index", "AdminHome");
