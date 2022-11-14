@@ -68,13 +68,16 @@ CREATE TABLE [dbo].[Allocation] (
     FOREIGN KEY ([Room_no]) REFERENCES [dbo].[Rooms] ([Room_no])
 );
 
-
 CREATE TABLE [dbo].[complaint] (
-    [Id]      INT       identity(1,1)    NOT NULL,
+    [Id]      INT           IDENTITY (1, 1) NOT NULL,
     [sub]     VARCHAR (100) NULL,
+    [user]    INT           NULL,
+    [Seen]    INT           NULL,
     [details] VARCHAR (250) NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    FOREIGN KEY ([user]) REFERENCES [dbo].[Users] ([Id])
 );
+
 
 CREATE TABLE [dbo].[Deallocation] (
     [Room_no]            INT  NULL,

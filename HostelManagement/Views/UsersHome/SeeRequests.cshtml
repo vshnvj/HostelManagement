@@ -11,7 +11,7 @@
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
         @*<input type="submit" value="Save" class="btn btn-primary" />*@
-        
+
     </div>
 </div>
 
@@ -19,13 +19,12 @@
 @{
     if (ViewData["Status"] != null)
     {
-    <h4>status: @ViewData["Status"]</h4>
+        <h4>status: @ViewData["Status"]</h4>
 
         if (ViewData["Status"] != null)
-                {
-                        <h4>Room no: @ViewData["room"]</h4>
-                }
-        
-}
+        {
+            <h4>Room no: @ViewData["room"]</h4>
+        }
+    }
 }
 

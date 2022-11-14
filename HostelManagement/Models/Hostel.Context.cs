@@ -12,17 +12,23 @@ namespace HostelManagement.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Web.Http;
+
     public partial class HostelDatabaseEntities2 : DbContext
     {
         public HostelDatabaseEntities2()
             : base("name=HostelDatabaseEntities2")
         {
+            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            HttpConfiguration config = GlobalConfiguration.Configuration;
+
+            config.Formatters.JsonFormatter
+                        .SerializerSettings
+                        .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
         }
     
         public virtual DbSet<Allocation> Allocations { get; set; }

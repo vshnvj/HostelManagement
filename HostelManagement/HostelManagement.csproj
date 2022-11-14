@@ -263,6 +263,7 @@
       <DependentUpon>Hostel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\css\cardRooms.css" />
     <Content Include="Scripts\css\StyleSheet1.css" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

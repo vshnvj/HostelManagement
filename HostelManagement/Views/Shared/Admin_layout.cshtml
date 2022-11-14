@@ -10,6 +10,18 @@
 </head>
 
 <style>
+
+    .log {
+                color: white;
+            
+    }
+
+         .log a:hover {
+                color: #000000;
+            
+    }
+
+
     .header {
   
         margin-top: 0px;
@@ -57,12 +69,22 @@
 
                 <li>@Html.ActionLink("Track Rent", "TrackRent", "AdminHome")</li>
                 <li>@Html.ActionLink("User feedback", "Feedback", "AdminHome")</li>
-                <li>@Html.ActionLink("Logout", "Logout", "AdminHome")</li>
+                @*<li>@Html.ActionLink("Logout", "Logout", "AdminHome")</li>*@
+              
+
+
+            <span class="navbar-brand " style="position: absolute;right: 10px;color:white;margin-left:10px">
+
+                <i class="fa-solid fa-arrow-right-from-bracket" style="padding-left:10px"></i>
+                @Html.ActionLink("Logout", "Logout", "AdminHome", new{},new { @class = "log" })
+
+            <i class="fa-solid fa-user"></i>Admin
+            </span>
 
             </ul>
-            <span class="navbar-brand " style="position: absolute;right: 10px;color:white">
+            @*<span class="navbar-brand " style="position: absolute;right: 10px;color:white">
                 Admin
-            </span>
+            </span>*@
         </div>
     </nav>
     <div class="container body-content">
